@@ -4,7 +4,8 @@ public class Article {
     int aid;
     int eid;
     int cid;
-    int state;
+    String state;
+//    byte[] content;
 
     public int getAid() {
         return aid;
@@ -30,11 +31,11 @@ public class Article {
         this.cid = cid;
     }
 
-    public int getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.state = state;
     }
 
