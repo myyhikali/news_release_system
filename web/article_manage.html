@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>管理员文章管理</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/plugins/bootstrap-markdown/bootstrap-markdown.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">青铜小姐姐</strong>
+                             </span> <span class="text-muted text-xs block">管理员 <b class="caret"></b></span> </span> </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="login.html">登出</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        IN+
+                    </div>
+                </li>
+                <li >
+                    <a href="hello.html"><i class="fa fa-th-large"></i> <span class="nav-label">主页</span></a>
+                </li>
+                <li>
+                    <a href="column_manage.html"><i class="fa fa-diamond"></i> <span class="nav-label">栏目管理</span></a>
+                </li>
+                <li class="active">
+                    <a href="article_manage.html"><i class="fa fa-magic"></i> <span class="nav-label">文章管理</span></a>
+                </li>
+
+                <li >
+                    <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">文章编辑管理</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="editor.html">文章编辑</a></li>
+                        <li><a href="editor_article_manage.html">文章管理</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="reader.html"><i class="fa fa-desktop"></i> <span class="nav-label">文章浏览</span></a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">欢迎来到新闻管理后台</span>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-sign-out"></i> 注销
+                        </a>
+                    </li>
+                    <li>
+                        <a class="right-sidebar-toggle">
+                            <i class="fa fa-tasks"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>文章</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">后台</a>
+                    </li>
+                    <li class="active">
+                        <strong>文章管理</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>文章ID</th>
+                                    <th>文章名称</th>
+                                    <th>栏目名称</th>
+                                    <th>编辑者</th>
+                                    <th>文章状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>001</td>
+                                    <td>🦊要等到姑娘呀</td>
+                                    <td><code>体育</code></td>
+                                    <td><code>坤坤</code></td>
+                                    <td><code>待审核</code></td>
+                                    <td>
+                                        <div class="center-block">
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal1">允许上传</button>
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal">退回稿件</button>
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal2">删除</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>fullscreen</code>
+                                    </td>
+                                    <td><code>object</code></td>
+                                    <td>包含 <code>enable</code> (<code>bool</code>) 和 <code>icons</code> (<code>object</code>) 键</td>
+                                    <td>
+                                        <code>fullscreen</code>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Attention</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row center-block" >
+                    <h3>确认退回文章吗？</h3>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1">Attention</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row center-block" >
+                    <h3>确认上传文章吗？</h3>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">Attention</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row center-block" >
+                    <h3>确认删除文章吗？</h3>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+
+<!-- Bootstrap markdown -->
+<script src="js/plugins/bootstrap-markdown/bootstrap-markdown.js"></script>
+<script src="js/plugins/bootstrap-markdown/markdown.js"></script>
+
+</body>
+
+</html>

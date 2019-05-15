@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Markdown</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/plugins/bootstrap-markdown/bootstrap-markdown.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">青铜小姐姐</strong>
+                             </span> <span class="text-muted text-xs block">管理员 <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="login.html">登出</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            IN+
+                        </div>
+                    </li>
+                    <li >
+                        <a href="hello.html"><i class="fa fa-th-large"></i> <span class="nav-label">主页</span></a>
+                    </li>
+                    <li>
+                        <a href="column_manage.html"><i class="fa fa-diamond"></i> <span class="nav-label">栏目管理</span></a>
+                    </li>
+                    <li>
+                        <a href="article_manage.html"><i class="fa fa-magic"></i> <span class="nav-label">文章管理</span></a>
+                    </li>
+
+                    <li class="active">
+                        <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">文章编辑管理</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="active"><a href="editor.html">文章编辑</a></li>
+                            <li><a href="editor_article_manage.html">文章管理</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="reader.html"><i class="fa fa-desktop"></i> <span class="nav-label">文章浏览</span></a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">欢迎来到新闻管理后台</span>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> 注销
+                    </a>
+                </li>
+                <li>
+                    <a class="right-sidebar-toggle">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Markdown</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">文章编辑</a>
+                        </li>
+                        <li class="active">
+                            <strong>Markdown</strong>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content">
+
+            <form role="form" >
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+                                    <p>
+                                        请在下面输入您需要<code>编辑</code>的内容
+                                    </p>
+                                    <textarea name="content" data-provide="markdown" rows="30">我是编辑器</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-1">
+                        <button type="submit" class="btn btn-primary block full-width m-b">保存</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="submit" class="btn btn-primary block full-width m-b">上传</button>
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>选项名称</th>
+                                    <th>类型</th>
+                                    <th>描述</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <code>autofocus</code>
+                                    </td>
+                                    <td><code>boolean</code></td>
+                                    <td>表示编辑器将在实例化后聚焦。默认为 <code>false</code></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>savable</code>
+                                    </td>
+                                    <td><code>boolean</code></td>
+                                    <td>表示编辑器将具有保存按钮和操作。默认为 <code>false</code></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>hideable</code>
+                                    </td>
+                                    <td><code>boolean</code></td>
+                                    <td>如果设置为 <code>true</code> 则编辑器将隐藏 <code>blur</code> 事件. 默认为 <code>false</code></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>width</code>
+                                    </td>
+                                    <td><code>mixed</code></td>
+                                    <td>编辑器宽度。默认为 <code>inherit</code>. 您可以提供任何数值（将被设置为css），或提供有效的Bootstrap类 (类似 <code>span2</code>)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>height</code>
+                                    </td>
+                                    <td><code>mixed</code></td>
+                                    <td>编辑高度。默认为 <code>inherit</code></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>resize</code>
+                                    </td>
+                                    <td><code>string</code></td>
+                                    <td>选项来禁用或更改调整大小的属性，可能的值 <code>none</code>,<code>both</code>,<code>horizontal</code>,<code>vertical</code>. 默认值 <code>none</code><br>
+                                        如果启用此选项，用户将能够调整编辑器和预览画面的大小。<br><br>
+                                        <div class="alert alert-warning">
+                                            <strong>浏览器支持</strong>
+                                            <p>目前仅在有限的浏览器上支持。请参阅 <a href="http://caniuse.com/css-resize" target="_blank">可以运行它：调整</a>所有支持的浏览器的大小</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>iconlibrary</code>
+                                    </td>
+                                    <td><code>string</code></td>
+                                    <td>要使用的图标库。支持Glyphicons (<code>glyph</code>) 和Font Awesome (<code>fa</code>) 为了正确使用Font Awesome，您需要自己 <a href="http://fontawesome.io/get-started/">添加Font Awesome样式表</a> 默认为 <code>glyph</code></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>language</code>
+                                    </td>
+                                    <td><code>string</code></td>
+                                    <td>本地化设置。默认为 <code>en</code></td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <code>footer</code>
+                                    </td>
+                                    <td><code>mixed</code></td>
+                                    <td>页脚大可以是字符串或回调。默认为空字符串</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <code>fullscreen</code>
+                                    </td>
+                                    <td><code>object</code></td>
+                                    <td>包含 <code>enable</code> (<code>bool</code>) 和 <code>icons</code> (<code>object</code>) 键</td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>
+                                        <code>hiddenButtons</code>
+                                    </td>
+                                    <td><code>mixed</code></td>
+                                    <td>要隐藏的数组或字符串的按钮名称。默认为空字符串</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <code>disabledButtons</code>
+                                    </td>
+                                    <td><code>mixed</code></td>
+                                    <td>要禁用的数组或字符串的按钮名称。默认为空字符串</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+
+        </div>
+        </div>
+
+
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+
+    <!-- Bootstrap markdown -->
+    <script src="js/plugins/bootstrap-markdown/bootstrap-markdown.js"></script>
+    <script src="js/plugins/bootstrap-markdown/markdown.js"></script>
+
+</body>
+
+</html>
