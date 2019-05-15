@@ -1,3 +1,7 @@
 /.idea/*
 lib/*
 out/*
+target/*
+news_relese_system.iml
+*.properties
+
