@@ -8,7 +8,7 @@
         <!--<result-->
     <!--</resultMap>-->
     <select id="findPicturesByAid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Picture">
-        select * from user where uname=#{aid}
+        select * from table_picture where uname=#{aid}
     </select>
 
 </mapper>

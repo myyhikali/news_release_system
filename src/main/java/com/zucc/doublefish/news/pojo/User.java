@@ -5,6 +5,8 @@ public class User {
     String uname;
     String pwd;
     int level;
+
+
     public int getUid() {
         return uid;
     }
@@ -36,5 +38,4 @@ public class User {
     public void setLevel(int level) {
         this.level = level;
     }
-
 }

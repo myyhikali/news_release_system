@@ -19,7 +19,8 @@ public class UserTest {
 
     @Test
     public void test(){
-        User users = userService.findUserByUname("admin");
+        System.out.println(userService.registerUser("editor","123456",0));
+        User users = userService.findUserByUname("editor");
         System.out.println(users.getUname());
     }
 }
