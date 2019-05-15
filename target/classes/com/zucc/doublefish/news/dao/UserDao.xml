@@ -4,6 +4,7 @@
 
 <mapper namespace="com.zucc.doublefish.news.dao.UserDao">
     <select id="findUserByUname" parameterType="String" resultType="User">
-        select * from user where uname=#{uname}
+        select * from table_user where uname=#{uname}
     </select>
+
 </mapper>
