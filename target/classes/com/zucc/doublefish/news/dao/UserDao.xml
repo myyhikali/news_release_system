@@ -7,4 +7,7 @@
         select * from table_user where uname=#{uname}
     </select>
 
+    <insert id="insertUser" useGeneratedKeys="true"  parameterType="User">
+        insert into table_user(uname,pwd,level) value ( #{uname},#{pwd},#{level} );
+    </insert>
 </mapper>
