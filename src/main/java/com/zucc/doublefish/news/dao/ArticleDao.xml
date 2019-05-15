@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zucc.doublefish.news.dao.ArticleDao">
+    <select id="findAllArticles" resultType="com.zucc.doublefish.news.pojo.Article">
+        select * from table_article
+    </select>
+
+    <select id="findAllArticlesByUserid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">
+        select * from table_article where eid=#{uid}
+    </select>
+
+    <select id="findAllArticlesByColumnid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">
+        select * from table_article where cid=#{cid}
+    </select>
+
+
+</mapper>
