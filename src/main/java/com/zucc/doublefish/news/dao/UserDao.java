@@ -4,5 +4,5 @@ import com.zucc.doublefish.news.pojo.User;
 
 public interface UserDao {
     public User findUserByUname(String uname);
-
+    public void insertUser(User user);
 }

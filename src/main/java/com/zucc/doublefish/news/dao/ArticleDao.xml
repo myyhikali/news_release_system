@@ -7,6 +7,10 @@
         select * from table_article
     </select>
 
+    <select id="findArticleByArticleid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">
+        select * from table_article where aid=#{aid}
+    </select>
+
     <select id="findAllArticlesByUserid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">
         select * from table_article where eid=#{uid}
     </select>
@@ -15,5 +19,13 @@
         select * from table_article where cid=#{cid}
     </select>
 
-
+    <insert id="insertArticle" useGeneratedKeys="true" parameterType="com.zucc.doublefish.news.pojo.Article">
+        insert into table_article(eid,cid,state) value ( #{eid},#{cid},#{state} );
+    </insert>
+    <delete id="deleteArticle" parameterType="Integer">
+        DELETE FROM table_article WHERE aid=#{aid}
+    </delete>
+    <update id="changeArticleStateByArticleid" parameterType="com.zucc.doublefish.news.pojo.Article">
+        UPDATE table_article SET state=#{state} WHERE aid=#{aid}
+    </update>
 </mapper>

@@ -13,6 +13,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleDao articleDao;
+
     public List<Article> findAllArticles(){
         return this.articleDao.findAllArticles();
     }
@@ -21,5 +22,19 @@ public class ArticleServiceImpl implements ArticleService {
     }
     public List<Article> findAllArticlesByColumnid(int cid){
         return this.articleDao.findAllArticlesByColumnid(cid);
+    }
+    public void insertArticle(Article article){
+        this.articleDao.insertArticle(article);
+    }
+    public Article findArticleByArticleid(int aid){
+        return this.articleDao.findArticleByArticleid(aid);
+    }
+    public void deleteArticle(int aid){
+        this.articleDao.deleteArticle(aid);
+    }
+    public void changeArticleStateByArticleid(int aid,String state){
+        Article article=this.findArticleByArticleid(aid);
+        article.setState(state);
+        this.articleDao.changeArticleStateByArticleid(article);
     }
 }

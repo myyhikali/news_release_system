@@ -7,6 +7,18 @@
         select * from table_column
     </select>
 
+    <insert id="insertColumn" useGeneratedKeys="true"  parameterType="com.zucc.doublefish.news.pojo.Column">
+        insert into table_column(cname,uid,createtime) value ( #{cname},#{uid},#{createtime} );
+    </insert>
+    <delete id="deleteColumn" parameterType="Integer">
+        DELETE FROM table_column WHERE cid=#{cid}
+    </delete>
+    <update id="updateColumn" parameterType="com.zucc.doublefish.news.pojo.Column">
+        UPDATE table_column SET cname=#{cname},uid=#{uid} WHERE cid=#{cid}
+    </update>
 
+    <select id="findColumnByColumnid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Column">
+        select * from table_column where cid=#{cid}
+    </select>
 
 </mapper>

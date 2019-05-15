@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,7 +33,20 @@ public class UserTest {
 
 //        List<Column> list=columnService.findAllColumns();
 //        System.out.println(list);
-        List<Article> articleList=articleService.findAllArticlesByColumnid(1000);
-        System.out.println(articleList);
+//        List<Article> articleList=articleService.findAllArticlesByColumnid(1000);
+//        System.out.println(articleList);
+//        Article article=new Article();
+//        article.setCid(210);
+//        article.setEid(211);
+//        article.setState(0);
+//        articleService.insertArticle(article);
+
+//        System.out.println(articleService.findArticleByArticleid(1).getAid());
+//        articleService.deleteArticle(212);
+//        int cid=1000;
+//        String cname="马术";
+//        columnService.updateColumn(cid, cname);
+//        columnService.deleteColumn(1002);
+        articleService.changeArticleStateByArticleid(1,"2");
     }
 }

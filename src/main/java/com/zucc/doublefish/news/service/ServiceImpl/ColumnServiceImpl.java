@@ -15,4 +15,21 @@ public class ColumnServiceImpl implements ColumnService {
     public List<Column> findAllColumns(){
         return this.columnDao.findAllColumns();
     }
+    public void insertColumn(Column column){
+        this.columnDao.insertColumn(column);
+    }
+    public void deleteColumn(int cid){
+        this.columnDao.deleteColumn(cid);
+    }
+    public void updateColumn(Column column){
+        this.columnDao.updateColumn(column);
+    }
+    public void updateColumn(int cid,String cname){
+        Column column=this.columnDao.findColumnByColumnid(cid);
+        column.setCname(cname);
+        this.columnDao.updateColumn(column);
+    }
+    public Column findColumnByColumnid(int cid){
+        return this.columnDao.findColumnByColumnid(cid);
+    }
 }

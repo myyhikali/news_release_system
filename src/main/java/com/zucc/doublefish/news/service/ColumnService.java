@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface ColumnService {
     public List<Column> findAllColumns();
+    public void insertColumn(Column column);
+    public void deleteColumn(int cid);
+    public void updateColumn(int cid,String cname);
+    public Column findColumnByColumnid(int cid);
 }
