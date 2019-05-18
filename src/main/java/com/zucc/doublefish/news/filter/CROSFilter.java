@@ -15,18 +15,24 @@ public class CROSFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         HttpServletRequest  request  = (HttpServletRequest)servletRequest;
 
+        System.out.println("filter");
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, If-Modified-Since");
+        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, If-Modified-Since,REDIRECT,CONTEXTPATH");
+        response.setHeader("Access-Control-Expose-Headers", "REDIRECT,CONTEXTPATH");
+
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
-        response.addHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
 
-        for(Cookie cookie:request.getCookies()){
-            if(cookie.getName().equals("editor")){
-                filterChain.doFilter(servletRequest,servletResponse);
-            }
-        }
-        request.getRequestDispatcher("/").forward(request,response);
+//        for(Cookie cookie:request.getCookies()){
+//            if(cookie.getName().equals("editor")){
+//                filterChain.doFilter(servletRequest,servletResponse);
+//            }
+//        }
+        filterChain.doFilter(request,response);
+        //request.getRequestDispatcher("/").forward(request,response);
     }
 
     public void destroy() {

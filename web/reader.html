@@ -90,27 +90,9 @@
             </nav>
         </div>
         <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-10">
+            <div class="col-lg-10" id="app">
                 <h2>栏目</h2>
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
-
-                <button class="btn btn-default">体育</button>
-                <button class="btn btn-default">体育</button>
+                <button class="btn btn-default" v-for="column in columns" v-on:click="chooseColumns" > {{ column.cname }} </button>
             </div>
 
         </div>
@@ -130,12 +112,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="gradeA">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 7</td>
-                                        <td>Win XP SP2+</td>
+                                    <tr class="gradeA" v-for="new in news">
+                                        <td>{{}}</td>
+                                        <td>{{}}</td>
+                                        <td>{{}}</td>
                                     </tr>
-                                    <tr class="gradeA">
+                                    <!-- <tr class="gradeA">
                                         <td>Presto</td>
                                         <td>Opera 8.5</td>
                                         <td>Win 95+ / OSX.2+</td>
@@ -144,7 +126,7 @@
                                         <td>Presto</td>
                                         <td>Opera 9.0</td>
                                         <td>Win 95+ / OSX.3+</td>
-                                    </tr>
+                                    </tr> -->
 
                                     </tbody>
                                 </table>
@@ -170,6 +152,8 @@
 <!-- Custom and plugin javascript -->
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="reader.js"></script>
 
 <!-- Page-Level Scripts -->
 <script>

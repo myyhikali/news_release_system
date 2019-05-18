@@ -1,10 +1,14 @@
 package com.zucc.doublefish.news.control;
 
+import com.zucc.doublefish.news.pojo.Result;
 import com.zucc.doublefish.news.pojo.User;
 import com.zucc.doublefish.news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -29,23 +33,34 @@ public class UserController {
     }
 
     @RequestMapping("/checklogin")
-    public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @ResponseBody
+    public Result login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uname = request.getParameter("username");
         String pwd   = request.getParameter("pwd");
+        Result rs = new Result();
 
         User checkUser = userService.findUserByUname(uname);
-        if(!pwd.equals(checkUser.getPwd())){
-            request.getRequestDispatcher("/user/login").forward(request,response);
+        if(checkUser==null||!pwd.equals(checkUser.getPwd())){
+            response.setHeader("REDIRECT","REDIRECT");
+            response.setHeader("CONTEXTPATH","login.html");
+            rs.setStatus("failed");
         }
         else{
             Cookie cookie = new Cookie("uname",uname);
             Cookie typeCookie = new Cookie("level",String.valueOf(checkUser.getLevel()));
             Cookie idCookie   = new Cookie("uid",String.valueOf(checkUser.getUid()));
+            cookie.setPath("/");
+            typeCookie.setPath("/");
+            idCookie.setPath("/");
             response.addCookie(cookie);
             response.addCookie(typeCookie);
             response.addCookie(idCookie);
-            request.getRequestDispatcher("/user").forward(request,response);
+            response.setHeader("REDIRECT","REDIRECT");
+            response.setHeader("CONTEXTPATH","index.html");
+            rs.setStatus("succeed");
         }
+
+        return rs;
     }
 
     @RequestMapping("/register")
