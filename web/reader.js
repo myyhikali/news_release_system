@@ -23,6 +23,7 @@ var app = new Vue({
     },
     methods:{
         chooseColumns:function(event){
+            event.srcElement.attributes.cid.nodeValue;
             console.log(event);
             // $.ajax({
             //     type: "GET",//方法类型   

@@ -92,7 +92,7 @@
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10" id="app">
                 <h2>栏目</h2>
-                <button class="btn btn-default" v-for="column in columns" v-on:click="chooseColumns" > {{ column.cname }} </button>
+                <button class="btn btn-default" v-for="column in columns" v-on:click="chooseColumns" cid={{column.cid}}> {{ column.cname }} </button>
             </div>
 
         </div>
@@ -112,12 +112,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="gradeA" v-for="new in news">
+                                    <!-- <tr class="gradeA" v-for="new in news">
                                         <td>{{}}</td>
                                         <td>{{}}</td>
                                         <td>{{}}</td>
-                                    </tr>
-                                    <!-- <tr class="gradeA">
+                                    </tr> -->
+                                    <tr class="gradeA">
                                         <td>Presto</td>
                                         <td>Opera 8.5</td>
                                         <td>Win 95+ / OSX.2+</td>
@@ -126,7 +126,7 @@
                                         <td>Presto</td>
                                         <td>Opera 9.0</td>
                                         <td>Win 95+ / OSX.3+</td>
-                                    </tr> -->
+                                    </tr>
 
                                     </tbody>
                                 </table>

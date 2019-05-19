@@ -7,6 +7,8 @@ public interface ArticleDao {
     public List<Article> findAllArticles();
     public List<Article> findAllArticlesByUserid(int uid);
     public List<Article> findAllArticlesByColumnid(int cid);
+    public List<Article> findArticlesWithState(int state);
+    public List<Article> findArticlesExceptState(int state);
     public Article findArticleByArticleid(int aid);
     public void insertArticle(Article article);
     public void deleteArticle(int aid);
