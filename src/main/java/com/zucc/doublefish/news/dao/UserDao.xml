@@ -6,8 +6,16 @@
     <select id="findUserByUname" parameterType="String" resultType="User">
         select * from table_user where uname=#{uname}
     </select>
+<<<<<<< HEAD
 
     <insert id="insertUser" useGeneratedKeys="true"  parameterType="User">
         insert into table_user(uname,pwd,level) value ( #{uname},#{pwd},#{level} );
     </insert>
 </mapper>
+=======
+    <insert id="insertUser" useGeneratedKeys="true"  parameterType="User">
+        insert into table_user(uname,pwd,level) value ( #{uname},#{pwd},#{level} );
+    </insert>
+
+</mapper>
+>>>>>>> f073f34f676406a26e69802f52a6de32c8943130

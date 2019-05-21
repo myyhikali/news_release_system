@@ -28,6 +28,7 @@ public class UserTest {
 
     @Test
     public void test(){
+<<<<<<< HEAD
 //        User users = userService.findUserByUname("admin");
 //        System.out.println(users.getUname());
 
@@ -48,5 +49,12 @@ public class UserTest {
 //        columnService.updateColumn(cid, cname);
 //        columnService.deleteColumn(1002);
         articleService.changeArticleStateByArticleid(1,"2");
+=======
+
+        System.out.println(userService.registerUser("editor","123456",0));
+        User users = userService.findUserByUname("editor");
+        System.out.println(users.getUname());
+
+>>>>>>> f073f34f676406a26e69802f52a6de32c8943130
     }
 }
