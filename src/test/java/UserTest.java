@@ -28,33 +28,14 @@ public class UserTest {
 
     @Test
     public void test(){
-<<<<<<< HEAD
-//        User users = userService.findUserByUname("admin");
-//        System.out.println(users.getUname());
+        Article article=new Article();
+        article.setCid(1);
+        article.setTitle("test");
+        article.setAid(1);
+        article.setContent("11111".getBytes());
+        article.setState("save");
+        article.setEid(1);
+        articleService.insertArticle(article);
 
-//        List<Column> list=columnService.findAllColumns();
-//        System.out.println(list);
-//        List<Article> articleList=articleService.findAllArticlesByColumnid(1000);
-//        System.out.println(articleList);
-//        Article article=new Article();
-//        article.setCid(210);
-//        article.setEid(211);
-//        article.setState(0);
-//        articleService.insertArticle(article);
-
-//        System.out.println(articleService.findArticleByArticleid(1).getAid());
-//        articleService.deleteArticle(212);
-//        int cid=1000;
-//        String cname="马术";
-//        columnService.updateColumn(cid, cname);
-//        columnService.deleteColumn(1002);
-        articleService.changeArticleStateByArticleid(1,"2");
-=======
-
-        System.out.println(userService.registerUser("editor","123456",0));
-        User users = userService.findUserByUname("editor");
-        System.out.println(users.getUname());
-
->>>>>>> f073f34f676406a26e69802f52a6de32c8943130
     }
 }
