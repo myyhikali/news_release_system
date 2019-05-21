@@ -18,24 +18,15 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class UserTest {
-
     @Autowired
     private UserService userService;
     @Autowired
     private ColumnService columnService;
     @Autowired
     private ArticleService articleService;
-
     @Test
     public void test(){
-        Article article=new Article();
-        article.setCid(1);
-        article.setTitle("test");
-        article.setAid(1);
-        article.setContent("11111".getBytes());
-        article.setState("save");
-        article.setEid(1);
-        articleService.insertArticle(article);
+
 
     }
 }

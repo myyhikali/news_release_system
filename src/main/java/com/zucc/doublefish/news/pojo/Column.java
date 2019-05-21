@@ -6,6 +6,7 @@ public class Column {
     int cid;
     String cname;
     int uid;
+    String uname;
     Date createtime;
 
     public int getCid() {
@@ -38,5 +39,13 @@ public class Column {
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 }
