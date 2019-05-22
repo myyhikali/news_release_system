@@ -22,6 +22,8 @@ import java.util.List;
 public class ManagerController {
     @Autowired
     ColumnService columnService;
+    @Autowired
+    ArticleService articleService;
 
     @RequestMapping("/article")
     @ResponseBody
