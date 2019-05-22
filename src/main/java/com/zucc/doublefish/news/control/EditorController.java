@@ -32,6 +32,7 @@ public class EditorController {
         byte[] content=request.getParameter("content").getBytes();
         String state=request.getParameter("state");
 
+
         Cookie cookies[]= request.getCookies();
         String uid=null;
         Result rs = new Result();

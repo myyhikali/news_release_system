@@ -1,6 +1,6 @@
 
 function save(){
-    var state = "save";
+    var state = "saved";
     var title=document.getElementById("atitle").value;
     var content=document.getElementById("content").innerHTML;
     $.ajax({
@@ -33,7 +33,7 @@ function save(){
 }
 
 function upload(){
-    var state = "upload";
+    var state = "published";
     var title=document.getElementById("atitle").value;
     var content=document.getElementById("content").innerHTML;
     $.ajax({
