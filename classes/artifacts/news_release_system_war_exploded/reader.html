@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -92,7 +92,7 @@
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10" id="app">
                 <h2>栏目</h2>
-                <button class="btn btn-default" v-for="column in columns" v-on:click="chooseColumns" cid={{column.cid}}> {{ column.cname }} </button>
+                <button class="btn btn-default" v-for="column in columns" v-on:click="chooseColumns" v-bind:cid="column.cid"> {{ column.cname }} </button>
             </div>
 
         </div>
@@ -112,20 +112,11 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!-- <tr class="gradeA" v-for="new in news">
-                                        <td>{{}}</td>
-                                        <td>{{}}</td>
-                                        <td>{{}}</td>
-                                    </tr> -->
-                                    <tr class="gradeA">
-                                        <td>Presto</td>
-                                        <td>Opera 8.5</td>
-                                        <td>Win 95+ / OSX.2+</td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Presto</td>
-                                        <td>Opera 9.0</td>
-                                        <td>Win 95+ / OSX.3+</td>
+
+                                    <tr class="gradeA" v-for="new in news" v-on:click="showArticle" v-bind:aid="new.aid">
+                                        <td v-text="new.title"></td>
+                                        <td v-text="new.content"></td>
+                                        <td v-text="new.eid"></td>
                                     </tr>
 
                                     </tbody>

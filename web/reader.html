@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -102,7 +102,7 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover dataTables-example" >
+                                <table id="readertable" class="table table-striped table-bordered table-hover dataTables-example" >
                                     <thead>
                                     <tr>
                                         <th>标题</th>
@@ -113,16 +113,22 @@
                                     </thead>
                                     <tbody>
 
-                                    <!-- <tr class="gradeA" v-for="new in news" v-on:click="showArticle" v-bind:aid="new.aid">
-                                        <td>{{new.title}}</td>
-                                        <td>{{new.content}}</td>
-                                        <td>{{new.eid}}</td>
-                                    </tr> -->
+                                    <!--<tr class="gradeA" v-for="new in news" v-on:click="showArticle" v-bind:aid="new.aid">-->
+                                        <!--<td v-text="new.title"></td>-->
+                                        <!--<td v-text="new.content"></td>-->
+                                        <!--<td v-text="new.eid"></td>-->
+                                    <!--</tr>-->
 
                                     </tbody>
                                 </table>
                             </div>
-
+                            <div class="row">
+                                <textarea class="btn" v-for="new in news" v-on:click="showArticle" v-bind:aid="new.aid">
+                                    v-text="new.title"
+                                    <br> v-text="new.content"
+                                    <br> v-text="new.eid"
+                                </textarea>
+                            </div>
                         </div>
                     </div>
                 </div>

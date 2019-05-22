@@ -13,7 +13,7 @@ window.onload =  function(){
             alert("异常！");
         }
     })
-}
+};
 
 var app = new Vue({
     el:"#wrapper",

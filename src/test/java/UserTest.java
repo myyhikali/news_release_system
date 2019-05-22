@@ -26,7 +26,10 @@ public class UserTest {
     private ArticleService articleService;
     @Test
     public void test(){
-
+        List<Article> list=articleService.findAllArticles();
+        for(Article a:list){
+            System.out.println(a.getAid());
+        }
 
     }
 }

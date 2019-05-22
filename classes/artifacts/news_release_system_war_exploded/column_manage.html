@@ -16,6 +16,8 @@
 
 </head>
 
+
+
 <body>
 
 <div id="wrapper">
@@ -117,29 +119,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        001
-                                    </td>
-                                    <td><code>体育</code></td>
-                                    <td><code>坤坤</code></td>
+                                <tr v-for="column in columns">
+                                    <td v-text="column.cid"></td>
+                                    <td><code v-text="column.cname"></code></td>
+                                    <td><code v-text="column.uname"></code></td>
                                     <td>
                                         <div class="center-block">
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal">修改</button>
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal1">删除</button>
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal" v-bind:data-cid="column.cid" v-bind:data-cname="column.cname">修改</button>
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal1" v-bind:data-cid="column.cid" v-bind:data-cname="column.cname">删除</button>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <code>fullscreen</code>
-                                    </td>
-                                    <td><code>object</code></td>
-                                    <td>包含 <code>enable</code> (<code>bool</code>) 和 <code>icons</code> (<code>object</code>) 键</td>
-                                    <td>
-                                        <code>fullscreen</code>
-                                    </td>
-                                </tr>
+                               
                                 </tbody>
                             </table>
 
@@ -170,14 +161,14 @@
             <div class="modal-body">
                 <div class="row" >
                     <p>栏目ID:</p>
-                    <input placeholder="010">
+                    <a >123</a>
                     <p>栏目名称:</p>
                     <input placeholder="我有一个大菠萝">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Save changes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" onclick="saveChanges(this)">Save changes</button>
             </div>
         </div>
     </div>
@@ -191,6 +182,7 @@
                 <h4 class="modal-title" id="myModalLabel1">Attention</h4>
             </div>
             <div class="modal-body">
+                <a></a>
                 <div class="row " >
                     <h3>确认要删除该栏目吗？</h3>
 
@@ -198,7 +190,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">确认</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" onclick="deleteColumn()">确认</button>
             </div>
         </div>
     </div>
@@ -213,15 +205,13 @@
             </div>
             <div class="modal-body">
                 <div class="row" >
-                    <p>栏目ID:</p>
-                    <input placeholder="输入栏目ID">
                     <p>栏目名称:</p>
                     <input placeholder="输入栏目名称">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">保存</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" onclick="addColumn()">保存</button>
             </div>
         </div>
     </div>
@@ -240,6 +230,9 @@
 <!-- Bootstrap markdown -->
 <script src="js/plugins/bootstrap-markdown/bootstrap-markdown.js"></script>
 <script src="js/plugins/bootstrap-markdown/markdown.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="column_manage.js"></script>
 
 </body>
 
