@@ -20,16 +20,9 @@
 
 <body>
 
-<div id="wrapper">
-    <div class="row">
-        <textarea class="btn" v-for="new in news" v-on:click="showArticle" v-bind:aid="new.aid">
-            v-text="new.title"
-            <br> v-text="new.content"
-            <br> v-text="new.eid"
-        </textarea>
-    </div>
+<div id="article-table">
 
-    <table id="readertable" class="table" >
+    <table id="readertable" >
         <thead>
         <tr>
             <th>标题</th>
