@@ -110,13 +110,14 @@
 
                                     </tr>
                                     </thead>
-                                    <tbody id="readertbody">
 
-                                    <!--<tr v-for="new in news" v-bind:aid="new.aid">-->
-                                        <!--<td v-text="new.aid"></td>-->
-                                        <!--<td v-text="new.cid"></td>-->
-                                        <!--<td v-text="new.eid"></td>-->
-                                    <!--</tr>-->
+                                    <tbody>
+                                
+                                    <tr class="gradeA" v-for="new in news" v-click="showArticle" v-bind:aid="new.aid">
+                                        <td v-text="new.title"></td>
+                                        <td v-text="new.content"></td>
+                                        <td v-text="new.eid"></td>
+                                    </tr>
 
                                     </tbody>
                                 </table>

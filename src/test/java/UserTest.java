@@ -30,6 +30,8 @@ public class UserTest {
         for(Article a:list){
             System.out.println(a.getAid());
         }
+        articleService.changeArticleStateByArticleid(1,"checked");
+
 
     }
 }
