@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zucc.doublefish.news.dao.ColumnDao">
+    <select id="findAllColumns" resultType="com.zucc.doublefish.news.pojo.Column">
+        select cid,cname,a.uid,uname,createtime from table_column a,table_user b where a.uid=b.uid
+    </select>
+
+    <insert id="insertColumn" useGeneratedKeys="true"  parameterType="com.zucc.doublefish.news.pojo.Column">
+        insert into table_column(cname,uid,createtime) value ( #{cname},#{uid},#{createtime} );
+    </insert>
+    <delete id="deleteColumn" parameterType="Integer">
+        DELETE FROM table_column WHERE cid=#{cid}
+    </delete>
+
+    <update id="updateColumn" parameterType="com.zucc.doublefish.news.pojo.Column">
+        UPDATE table_column SET cname=#{cname},uid=#{uid} WHERE cid=#{cid}
+    </update>
+
+    <select id="findColumnByColumnid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Column">
+        select * from table_column where cid=#{cid}
+    </select>
+
+    <select id="findColumnByColumnName" parameterType="String" resultType="com.zucc.doublefish.news.pojo.Column">
+        select * from table_column where cname=#{cname}
+    </select>
+
+
+
+</mapper>

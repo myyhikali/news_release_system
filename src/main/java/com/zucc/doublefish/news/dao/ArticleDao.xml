@@ -26,7 +26,7 @@
     </select>
 
     <insert id="insertArticle" useGeneratedKeys="true" parameterType="com.zucc.doublefish.news.pojo.Article">
-        insert into table_article(eid,cid,state) value ( #{eid},#{cid},#{state} );
+        insert into table_article(eid,cid,state,content,title) value(#{eid},#{cid},#{state},#{content},#{title});
     </insert>
     <delete id="deleteArticle" parameterType="Integer">
         DELETE FROM table_article WHERE aid=#{aid}

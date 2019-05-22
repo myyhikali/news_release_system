@@ -18,21 +18,20 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class UserTest {
-
     @Autowired
     private UserService userService;
     @Autowired
     private ColumnService columnService;
     @Autowired
     private ArticleService articleService;
-
     @Test
     public void test(){
-
+        List<Article> list=articleService.findAllArticles();
+        for(Article a:list){
+            System.out.println(a.getAid());
+        }
         articleService.changeArticleStateByArticleid(1,"checked");
-//        System.out.println(userService.registerUser("editor","123456",0));
-//        User users = userService.findUserByUname("editor");
-//        System.out.println(users.getUname());
+
 
     }
 }

@@ -10,7 +10,6 @@ public class Article {
     String uname;
     byte[] content;
 
-
     public int getAid() {
         return aid;
     }

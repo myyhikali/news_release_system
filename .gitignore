@@ -1,6 +1,13 @@
 /.idea/*
 lib/*
 out/*
+<<<<<<< HEAD
+target/*
+news_relese_system.iml
+*.properties
+
+=======
 news_release_system.iml
 target/*
 src/main/resources/db.properties
+>>>>>>> f073f34f676406a26e69802f52a6de32c8943130

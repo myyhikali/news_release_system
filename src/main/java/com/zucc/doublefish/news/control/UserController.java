@@ -64,7 +64,37 @@ public class UserController {
     }
 
     @RequestMapping("/register")
-    public void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @ResponseBody
+    public Result register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String uname = request.getParameter("lusername");
+        String pwd   = request.getParameter("lpwd");
+        String pwd1   = request.getParameter("lpwd1");
+        Result rs = new Result();
+        if(uname==null||!pwd.equals(pwd1)){
+            response.setHeader("REDIRECT","REDIRECT");
+            response.setHeader("CONTEXTPATH","register.html");
+            rs.setStatus("username is null or pwd not equal pwd1");
+            return rs;
+        }
+        User checkUser = userService.findUserByUname(uname);
+        if(checkUser!=null){
+            response.setHeader("REDIRECT","REDIRECT");
+            response.setHeader("CONTEXTPATH","register.html");
+            rs.setStatus("username is exist");
+        }
+        else{
+            int level;
+            if (request.getParameter("choice").equals("editor")){
+                level=0;
+            }
+            else
+                level=1;
+            userService.registerUser(uname,pwd,level);
+            response.setHeader("REDIRECT","REDIRECT");
+            response.setHeader("CONTEXTPATH","login.html");
+            rs.setStatus("succeed");
+        }
 
+        return rs;
     }
 }

@@ -1,11 +1,11 @@
 
 window.onload =  function(){
     $.ajax({
-        type: "GET",//方法类型   
+        type: "GET",//方法类型
         url: "http://localhost:10080/columns" ,//url
         dataType: "json",//预期服务器返回
         success: function (result,status,xhr) {
-            console.log(result);    
+            console.log(result);
             app.columns=result;
         },
         error : function(e) {
@@ -13,7 +13,42 @@ window.onload =  function(){
             alert("异常！");
         }
     })
-}
+    getArticles(1);
+};
+
+function getArticles(cid){
+    $.ajax({
+        type: "GET",//方法类型
+        url: "http://localhost:10080/columns/"+cid ,//url
+        dataType: "json",//预期服务器返回
+        success: function (result,status,xhr) {
+            var table = document.querySelector("#readertbody");
+            table.innerText = "";
+
+            for(var i =0;i<result.length;i++){
+                console.log(result[i]);
+                var t = document.createElement("tr");
+                var title = document.createElement("td");
+                var content = document.createElement("td");
+                var editor = document.createElement("td");
+
+                title.textContent = result[i].title;
+                content.textContent = result[i].content;
+                editor.textContent = result[i].eid;
+
+                t.appendChild(title);
+                t.appendChild(content);
+                t.appendChild(editor);
+                table.appendChild(t);
+            }
+        },
+        error : function(e) {
+            console.log(e);
+            alert("异常！");
+        }
+    })
+};
+
 
 var app = new Vue({
     el:"#app",
@@ -23,33 +58,7 @@ var app = new Vue({
     methods:{
         chooseColumns:function(event){
             console.log(event.target.attributes[0].nodeValue);
-            console.log("uname",this.columns[0].uname);   
-            $.ajax({
-                type: "GET",//方法类型   
-                url: "http://localhost:10080/columns/"+event.target.attributes[0].nodeValue ,//url
-                dataType: "json",//预期服务器返回
-                success: function (result,status,xhr) {
-                    console.log(result); 
-                    app2.news = result;
-                },
-                error : function(e) {
-                    console.log(e);
-                    alert("异常！");
-                }
-            })
-        }
-    }
-})
-
-var app2 = new Vue({
-    el:"#article-table",
-    data:{
-        news:[]
-    },
-    methods:{
-        showArticles:function(event){
-            console.log(event.target.attributes[0].nodeValue);
-
+            getArticles(event.target.attributes[0].nodeValue);
         }
     }
 })
