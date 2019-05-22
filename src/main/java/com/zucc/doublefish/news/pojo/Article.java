@@ -6,6 +6,8 @@ public class Article {
     int cid;
     String state;
     String title;
+    String cname;
+    String ename;
     byte[] content;
 
     public int getAid() {
@@ -54,5 +56,21 @@ public class Article {
 
     public void setContent(byte[] content) {
         this.content = content;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
+    public String getEname() {
+        return ename;
+    }
+
+    public void setEname(String ename) {
+        this.ename = ename;
     }
 }
