@@ -29,7 +29,7 @@ public class UserTest {
     @Test
     public void test(){
 
-        System.out.println(articleService.findAllArticlesByColumnid(1));
+        articleService.changeArticleStateByArticleid(1,"checked");
 //        System.out.println(userService.registerUser("editor","123456",0));
 //        User users = userService.findUserByUname("editor");
 //        System.out.println(users.getUname());

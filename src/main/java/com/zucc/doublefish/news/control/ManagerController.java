@@ -7,6 +7,7 @@ import com.zucc.doublefish.news.service.ArticleService;
 import com.zucc.doublefish.news.service.ColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +29,16 @@ public class ManagerController {
     @RequestMapping("/article")
     @ResponseBody
     public List<Article> findAllArticlesPublished(){
-        return null;
+        return articleService.findAllArticlesPublished();
+    }
+
+    @RequestMapping("/article/{aid}/{state}")
+    @ResponseBody
+    public Result allowPublish(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid,@PathVariable("state") String state){
+        Result rs = new Result();
+        articleService.changeArticleStateByArticleid(aid,state);
+        rs.setStatus("succeed");
+        return rs;
     }
 
     @RequestMapping(value = "/modifycolumn",method = RequestMethod.PUT)

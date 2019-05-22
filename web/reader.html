@@ -113,7 +113,7 @@
                                     </thead>
                                     <tbody>
                                 
-                                    <tr class="gradeA" v-for="new in news" v-bind:aid="new.aid">
+                                    <tr class="gradeA" v-for="new in news" v-click="showArticle" v-bind:aid="new.aid">
                                         <td v-text="new.title"></td>
                                         <td v-text="new.content"></td>
                                         <td v-text="new.eid"></td>

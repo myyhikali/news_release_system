@@ -18,8 +18,7 @@ window.onload =  function(){
 var app = new Vue({
     el:"#app",
     data:{
-        columns:[],
-        news:[]
+        columns:[]
     },
     methods:{
         chooseColumns:function(event){
@@ -50,7 +49,7 @@ var app2 = new Vue({
     methods:{
         showArticles:function(event){
             console.log(event.target.attributes[0].nodeValue);
-            
+
         }
     }
 })
