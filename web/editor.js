@@ -1,3 +1,18 @@
+window.onload =  function(){
+    $.ajax({
+        type: "GET",//方法类型
+        url: "http://localhost:10080/columns" ,//url
+        dataType: "json",//预期服务器返回
+        success: function (result,status,xhr) {
+            console.log(result);
+            app.columns=result;
+        },
+        error : function(e) {
+            console.log(e);
+            alert("异常！");
+        }
+    })
+};
 
 function save(){
     var state = "saved";
@@ -40,10 +55,9 @@ function upload(){
         xhrFields: {
             withCredentials: true
         },
-        type: "POST",//方法类型
+        type: "POST",
         url: "http://localhost:10080/editor/save?state="+ state+"&title="+title+"&content="+content,//url
         dataType: "json",//预期服务器返回的数据类型
-        // data: $('#editormassage').serialize(),
         success: function (result,status,xhr) {
             console.log(result);
             if (result.status === "succeed") {
@@ -65,3 +79,16 @@ function upload(){
     });
 }
 
+var app = new Vue({
+    el:"#page-wrapper",
+    data:{
+        columns:[],
+        cid:''
+    },
+    methods:{
+        getColumnSelected:function(){
+           
+            console.log(this.cid) ;
+        }
+    }
+})

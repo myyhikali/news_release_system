@@ -23,9 +23,9 @@ public class EditorController {
     @Autowired
     private ArticleService articleService;
 
-    @RequestMapping("/save")
+    @RequestMapping("/save/{cid}")
     @ResponseBody
-    public Result save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public Result save(HttpServletRequest request, HttpServletResponse response,@PathVariable("cid") int cid) throws ServletException, IOException {
         String title=request.getParameter("title");
         byte[] content=request.getParameter("content").getBytes();
         String state=request.getParameter("state");
@@ -52,7 +52,7 @@ public class EditorController {
             article.setContent(content);
             article.setTitle(title);
             article.setEid(Integer.parseInt(uid));
-            article.setCid(1);
+            article.setCid(cid);
             articleService.insertArticle(article);
             response.setHeader("REDIRECT","REDIRECT");
             response.setHeader("CONTEXTPATH","editor.html");

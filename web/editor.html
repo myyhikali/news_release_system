@@ -108,12 +108,8 @@
                         <div class="ibox-title" style="height: 160px">
                             <h3 class="text-warning">文章标题:</h3><input placeholder="请输入你的标题" name="title" id="atitle">
                             <h3 class="text-success">栏目类型</h3>
-                            <select class="form-control" style="width: 10%">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            <select class="form-control" style="width: 10%" v-model="cid" @change="getColumnSelected"> 
+                                <option :value="column.cid" v-for="column in columns" v-text="column.cname"></option>
                             </select>
                         </div>
                         <div class="ibox-content no-padding">
