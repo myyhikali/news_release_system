@@ -16,7 +16,7 @@
     </select>
 
     <select id="findArticlesExceptState" parameterType="String" resultType="com.zucc.doublefish.news.pojo.Article">
-        select aid,a.uid,title,a.cid,b.cid,b.cname,c.uname  from table_article a left join table_column b on(a.cid=b.cid) left join table_user c on (a.uid=c.uid) where eid=#{uid}
+        select aid,a.eid,title,a.state,a.content,a.cid,b.cid,b.cname,c.uname  from table_article a left join table_column b on(a.cid=b.cid) left join table_user c on (a.eid=c.uid) where a.state not in (#{state})
     </select>
 
     <select id="findAllArticlesByColumnid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">

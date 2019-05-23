@@ -27,17 +27,6 @@ public class UserTest {
     private ArticleService articleService;
     @Test
     public void test(){
-//        List<Article> list=articleService.findAllArticles();
-//        for(Article a:list){
-//            System.out.println(a.getAid());
-//        }
-
-        ArticleModify modify=new ArticleModify();
-        modify.setEid(1);
-        modify.setEstate("upload");
-        modify.setMtime(new Date(System.currentTimeMillis()));
-        modify.setUid(1);
-        articleService.insertArticleModify(modify);
 
     }
 }

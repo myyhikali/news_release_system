@@ -24,6 +24,11 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> findAllArticlesByColumnid(int cid){
         return this.articleDao.findAllArticlesByColumnid(cid);
     }
+
+    public List<Article> findAllArticlesPublished() {
+        return articleDao.findArticlesExceptState("saved");
+    }
+
     public void insertArticle(Article article){
         this.articleDao.insertArticle(article);
     }
@@ -42,4 +47,5 @@ public class ArticleServiceImpl implements ArticleService {
     public void insertArticleModify(ArticleModify articleModify){
         articleDao.insertArticleModify(articleModify);
     }
+
 }

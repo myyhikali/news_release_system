@@ -7,7 +7,7 @@ public class Article {
     String state;
     String title;
     String cname;
-    String ename;
+    String uname;
     byte[] content;
 
     public int getAid() {
@@ -66,11 +66,11 @@ public class Article {
         this.cname = cname;
     }
 
-    public String getEname() {
-        return ename;
+    public String getUname() {
+        return uname;
     }
 
-    public void setEname(String ename) {
-        this.ename = ename;
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 }
