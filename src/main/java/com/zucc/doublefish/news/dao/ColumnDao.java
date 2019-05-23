@@ -11,4 +11,5 @@ public interface ColumnDao {
     public void deleteColumn(int cid);
     public void updateColumn(Column column);
     public Column findColumnByColumnName(String cname);
+
 }

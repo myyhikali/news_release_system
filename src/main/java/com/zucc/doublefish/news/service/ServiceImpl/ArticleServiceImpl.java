@@ -2,6 +2,7 @@ package com.zucc.doublefish.news.service.ServiceImpl;
 
 import com.zucc.doublefish.news.dao.ArticleDao;
 import com.zucc.doublefish.news.pojo.Article;
+import com.zucc.doublefish.news.pojo.ArticleModify;
 import com.zucc.doublefish.news.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,9 @@ public class ArticleServiceImpl implements ArticleService {
         Article article=this.findArticleByArticleid(aid);
         article.setState(state);
         this.articleDao.changeArticleStateByArticleid(article);
+    }
+
+    public void insertArticleModify(ArticleModify articleModify){
+        articleDao.insertArticleModify(articleModify);
     }
 }
