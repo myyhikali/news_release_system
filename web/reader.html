@@ -20,6 +20,21 @@
 
 <body>
 
+<style>
+    .carousel .item {
+        height: 300px;
+        width: 500px;
+        background-color: #777;
+    }
+    .carousel-inner > .item > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        height: 300px;
+        width: 500px;
+    }</style>
+
 <div id="wrapper">
 
     <nav class="navbar-default navbar-static-side" role="navigation">
@@ -97,6 +112,53 @@
 
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="container-fluid col-lg-6">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active ">
+                            <img src="img/rails_logo.png" class="img-responsive" alt="First slide">
+                        </div>
+                        <div class="item">
+                            <img src="img/p3.jpg" class="img-responsive" alt="Second slide">
+                        </div>
+                        <div class="item">
+                            <img src="img/p4.jpg" class="img-responsive" alt="Third slide">
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="container-fluid col-lg-6">
+                <a class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</a>
+                <br><br>
+                <a class="text-primary">Nullam id dolor id nibh ultricies vehicula ut id elit..</a>
+                <br><br>
+                <a class="text-success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</a>
+                <br><br>
+                <a class="text-info">.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</a>
+                <br><br>
+                <a class="text-warning">.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</a>
+                <br><br>
+                <a class="text-danger">Duis mollis, est non commodo luctus, nisi erat porttitor ligula..</a>
+                <br><br>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
