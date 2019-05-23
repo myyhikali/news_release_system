@@ -22,7 +22,7 @@ function getArticles(cid){
         url: "http://localhost:10080/columns/"+cid ,//url
         dataType: "json",//预期服务器返回
         success: function (result,status,xhr) {
-            var table = document.querySelector("#readertbody");
+            var table = document.querySelector("#readertable");
             table.innerText = "";
 
             for(var i =0;i<result.length;i++){

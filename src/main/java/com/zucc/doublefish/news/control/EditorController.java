@@ -7,10 +7,7 @@ import com.zucc.doublefish.news.service.ArticleService;
 import com.zucc.doublefish.news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -18,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/editor")
@@ -62,4 +60,12 @@ public class EditorController {
         }
         return rs;
     }
+
+    @RequestMapping("/{uid}/article")
+    @ResponseBody
+    public List<Article> findEditorArticles(@PathVariable("uid") int uid){
+        return articleService.findAllArticlesByUserid(uid);
+    }
+
+
 }
