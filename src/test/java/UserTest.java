@@ -1,4 +1,5 @@
 import com.zucc.doublefish.news.pojo.Article;
+import com.zucc.doublefish.news.pojo.ArticleModify;
 import com.zucc.doublefish.news.pojo.Column;
 import com.zucc.doublefish.news.pojo.User;
 import com.zucc.doublefish.news.service.ArticleService;
@@ -26,12 +27,6 @@ public class UserTest {
     private ArticleService articleService;
     @Test
     public void test(){
-        List<Article> list=articleService.findAllArticles();
-        for(Article a:list){
-            System.out.println(a.getAid());
-        }
-        articleService.changeArticleStateByArticleid(1,"checked");
-
 
     }
 }

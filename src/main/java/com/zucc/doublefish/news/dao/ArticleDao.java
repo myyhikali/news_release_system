@@ -1,6 +1,8 @@
 package com.zucc.doublefish.news.dao;
 
 import com.zucc.doublefish.news.pojo.Article;
+import com.zucc.doublefish.news.pojo.ArticleModify;
+
 import java.util.List;
 
 public interface ArticleDao {
@@ -13,4 +15,5 @@ public interface ArticleDao {
     public void insertArticle(Article article);
     public void deleteArticle(int aid);
     public void changeArticleStateByArticleid(Article article);
+    public void insertArticleModify(ArticleModify articleModify);
 }

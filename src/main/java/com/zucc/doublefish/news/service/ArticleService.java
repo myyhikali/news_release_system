@@ -1,6 +1,7 @@
 package com.zucc.doublefish.news.service;
 
 import com.zucc.doublefish.news.pojo.Article;
+import com.zucc.doublefish.news.pojo.ArticleModify;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface ArticleService {
     public void insertArticle(Article article);
     public void deleteArticle(int aid);
     public void changeArticleStateByArticleid(int aid,String state);
+
+    public void insertArticleModify(ArticleModify articleModify);
 }
