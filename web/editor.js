@@ -2,15 +2,17 @@
 function save(){
     var state = "saved";
     var title=document.getElementById("atitle").value;
-    var content=document.getElementById("content").innerHTML;
+    var content=$('#content').summernote('code');
+    // var content=document.getElementById("content").innerHTML;
     $.ajax({
         xhrFields: {
             withCredentials: true
         },
         type: "POST",//方法类型
-        url: "http://localhost:10080/editor/save?state="+ state+"&title="+title+"&content="+content,//url
+        url: "http://localhost:10080/editor/save?state="+ state+"&title="+title,//url
         dataType: "json",//预期服务器返回的数据类型
-        // data: $('#editormassage').serialize(),
+        data: JSON.stringify(new result("succeed",content) ),
+        contentType: "application/json",
         success: function (result,status,xhr) {
             console.log(result);
             if (result.status === "succeed") {
@@ -32,10 +34,20 @@ function save(){
     });
 }
 
+function result(status,content){
+    this.status = status;
+    this.content = content;
+
+}
+
+
+
 function upload(){
     var state = "published";
     var title=document.getElementById("atitle").value;
-    var content=document.getElementById("content").innerHTML;
+    var content=$('#content').summernote('code');
+    // var content=document.getElementById("content").innerHTML;
+    console.log(content);
     $.ajax({
         xhrFields: {
             withCredentials: true

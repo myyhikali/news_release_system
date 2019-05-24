@@ -1,5 +1,6 @@
 package com.zucc.doublefish.news.control;
 
+import com.zucc.doublefish.news.dao.ArticleDao;
 import com.zucc.doublefish.news.pojo.Article;
 import com.zucc.doublefish.news.pojo.Result;
 import com.zucc.doublefish.news.pojo.User;
@@ -7,10 +8,7 @@ import com.zucc.doublefish.news.service.ArticleService;
 import com.zucc.doublefish.news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -27,9 +25,12 @@ public class EditorController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public Result save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public Result save(HttpServletRequest request, HttpServletResponse response,@RequestBody Result contentJson) throws ServletException, IOException {
         String title=request.getParameter("title");
-        byte[] content=request.getParameter("content").getBytes();
+        System.out.println(30);
+        System.out.println(contentJson.getContent());
+        byte[] content=contentJson.getContent().getBytes();
+        System.out.println(contentJson.getContent().getBytes());
         String state=request.getParameter("state");
 
 
@@ -62,4 +63,9 @@ public class EditorController {
         }
         return rs;
     }
+
+
 }
+
+
+

@@ -102,7 +102,7 @@
             </div>
 
         </div>
-        <div class="wrapper wrapper-content  animated fadeInRight article">
+        <div id="article" class="wrapper wrapper-content  animated fadeInRight article">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
                     <div class="ibox">
@@ -112,19 +112,11 @@
                             </div>
                             <div class="text-center article-title">
                                 <h1 class="text-warning">
-                                    文章标题
+                                    {{ article.title }}
                                 </h1>
                             </div>
                             <div class="text-center article" id="content">
-                                <p>
-                                    在我们看来，宇宙万物皆是永恒变化的，所以我们产生了时间的概念。通过时间，我们可以研究事物的变化。然而，关于时间的本质，还有待我们进一步探究。
-                                </p>
-                                <p>
-                                    时间流动是真实还是错觉？<br>
-                                    之所以有些人认为时间流动是错觉，是因为当人们停下来思考时，无法理解时间流动究竟意味着什么。我们常说时间就像河流一样流动，这样的意思是河流的水在某一时刻处于与前一时刻不同的地方。换言之，水相对于时间移动。然而，时间并不能随着时间而流动，时间就是时间。
 
-                                    很多人误以为时间不流动就是意味着没有时间，时间不存在。然而，这是无稽之谈。时间当然存在，我们用时钟来测量它。时钟不是测量时间的流逝，而是测量时间的间隔。在事件之间存在时间间隔，这就是时钟所测量的。
-                                </p>
                             </div>
 
 
@@ -152,7 +144,8 @@
 <!-- Bootstrap markdown -->
 <script src="js/plugins/bootstrap-markdown/bootstrap-markdown.js"></script>
 <script src="js/plugins/bootstrap-markdown/markdown.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="sample.js"></script>
 </body>
 
 </html>
