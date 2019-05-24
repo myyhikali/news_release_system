@@ -18,6 +18,20 @@
         </sourceRoots>
       </configuration>
     </facet>
+    <facet type="web" name="Web2">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/classes/artifacts/news_release_system_war_exploded/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/classes/artifacts/news_release_system_war_exploded" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -34,5 +48,7 @@
     <orderEntry type="library" name="Spring-4.3.18.RELEASE" level="project" />
     <orderEntry type="library" name="Spring MVC-4.3.18.RELEASE" level="project" />
     <orderEntry type="library" name="aopalliance-1.0" level="project" />
+    <orderEntry type="library" name="javax.servlet-api-4.0.1" level="project" />
+    <orderEntry type="library" name="mybatis" level="project" />
   </component>
 </module>

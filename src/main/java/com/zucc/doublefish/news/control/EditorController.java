@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/editor")
@@ -23,9 +24,11 @@ public class EditorController {
     @Autowired
     private ArticleService articleService;
 
-    @RequestMapping("/save")
+    @RequestMapping("/save/{cid}")
     @ResponseBody
-    public Result save(HttpServletRequest request, HttpServletResponse response,@RequestBody Result contentJson) throws ServletException, IOException {
+
+    public Result save(HttpServletRequest request, HttpServletResponse response,@PathVariable("cid") int cid,@RequestBody Result contentJson) throws ServletException, IOException {
+
         String title=request.getParameter("title");
         System.out.println(30);
         System.out.println(contentJson.getContent());
@@ -55,13 +58,19 @@ public class EditorController {
             article.setContent(content);
             article.setTitle(title);
             article.setEid(Integer.parseInt(uid));
-            article.setCid(1);
+            article.setCid(cid);
             articleService.insertArticle(article);
             response.setHeader("REDIRECT","REDIRECT");
             response.setHeader("CONTEXTPATH","editor.html");
             rs.setStatus("succeed");
         }
         return rs;
+    }
+    
+    @RequestMapping("/{uid}/article")
+    @ResponseBody
+    public List<Article> findEditorArticles(@PathVariable("uid") int uid){
+        return articleService.findAllArticlesByUserid(uid);
     }
 
 
