@@ -35,6 +35,8 @@ public class UserController {
     @RequestMapping("/checklogin")
     @ResponseBody
     public Result login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
         String uname = request.getParameter("username");
         String pwd   = request.getParameter("pwd");
         Result rs = new Result();
@@ -46,15 +48,15 @@ public class UserController {
             rs.setStatus("failed");
         }
         else{
-            Cookie cookie = new Cookie("uname",uname);
-            Cookie typeCookie = new Cookie("level",String.valueOf(checkUser.getLevel()));
-            Cookie idCookie   = new Cookie("uid",String.valueOf(checkUser.getUid()));
+            session.setAttribute("uname",uname);
+            session.setAttribute("level",String.valueOf(checkUser.getLevel()));
+            session.setAttribute("uid",String.valueOf(checkUser.getUid()));
+            Cookie cookie = new Cookie("SESSIONID",session.getId());
+//            Cookie cookie = new Cookie("uname",uname);
+//            Cookie typeCookie = new Cookie("level",String.valueOf(checkUser.getLevel()));
+//            Cookie idCookie   = new Cookie("uid",String.valueOf(checkUser.getUid()));
             cookie.setPath("/");
-            typeCookie.setPath("/");
-            idCookie.setPath("/");
             response.addCookie(cookie);
-            response.addCookie(typeCookie);
-            response.addCookie(idCookie);
             response.setHeader("REDIRECT","REDIRECT");
             response.setHeader("CONTEXTPATH","index.html");
             rs.setStatus("succeed");

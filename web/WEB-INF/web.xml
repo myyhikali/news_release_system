@@ -8,14 +8,20 @@
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
 
+    <listener>
+        <listener-class>com.zucc.doublefish.news.listener.SessionListener</listener-class>
+    </listener>
+
     <filter>
-        <filter-name>crosfilter</filter-name>
-        <filter-class>com.zucc.doublefish.news.filter.CROSFilter</filter-class>
+        <filter-name>corsfilter</filter-name>
+        <filter-class>com.zucc.doublefish.news.filter.CORSFilter</filter-class>
     </filter>
+
     <filter-mapping>
-        <filter-name>crosfilter</filter-name>
+        <filter-name>corsfilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

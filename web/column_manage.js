@@ -3,6 +3,9 @@ window.onload = getColumns();
 
 function getColumns(){
     $.ajax({
+        xhrFields: {
+            withCredentials: true
+        },
         type: "GET",  
         url: "http://localhost:10080/columns" ,
         dataType: "json",
