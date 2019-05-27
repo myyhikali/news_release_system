@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CROSFilter implements Filter {
+public class CORSFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }
