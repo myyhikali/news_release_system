@@ -1,12 +1,46 @@
 
 window.onload =  function(){
     $.ajax({
-        type: "GET",//方法类型   
+        type: "GET",//方法类型
         url: "http://localhost:10080/columns" ,//url
         dataType: "json",//预期服务器返回
         success: function (result,status,xhr) {
-            console.log(result);    
+            console.log(result);
             app.columns=result;
+        },
+        error : function(e) {
+            console.log(e);
+            alert("异常！");
+        }
+    })
+    getArticles(1);
+};
+
+function getArticles(cid){
+    $.ajax({
+        type: "GET",//方法类型
+        url: "http://localhost:10080/columns/"+cid ,//url
+        dataType: "json",//预期服务器返回
+        success: function (result,status,xhr) {
+            var table = document.querySelector("#readertable");
+            table.innerText = "";
+
+            for(var i =0;i<result.length;i++){
+                console.log(result[i]);
+                var t = document.createElement("tr");
+                var title = document.createElement("td");
+                var content = document.createElement("td");
+                var editor = document.createElement("td");
+
+                title.textContent = result[i].title;
+                content.textContent = result[i].content;
+                editor.textContent = result[i].eid;
+
+                t.appendChild(title);
+                t.appendChild(content);
+                t.appendChild(editor);
+                table.appendChild(t);
+            }
         },
         error : function(e) {
             console.log(e);
@@ -15,46 +49,20 @@ window.onload =  function(){
     })
 };
 
+
 var app = new Vue({
-    el:"#wrapper",
+    el:"#app",
     data:{
-        columns:[],
-        news:[]
+        columns:[]
     },
     methods:{
         chooseColumns:function(event){
             console.log(event.target.attributes[0].nodeValue);
-            console.log("uname",columns[0].uname);   
-            $.ajax({
-                type: "GET",//方法类型   
-                url: "http://localhost:10080/columns/"+event.target.attributes[0].nodeValue ,//url
-                dataType: "json",//预期服务器返回
-                success: function (result,status,xhr) {
-                    console.log(result); 
-                    news = result;
-                },
-                error : function(e) {
-                    console.log(e);
-                    alert("异常！");
-                }
-            })
+            getArticles(event.target.attributes[0].nodeValue);
         },
-
-        updateArticles:function(){
-            console.log(event.target.attributes[0].nodeValue);
-            $.ajax({
-                type: "GET",//方法类型   
-                url: "http://localhost:10080/columns/"+event.target.attributes[0].nodeValue ,//url
-                dataType: "json",//预期服务器返回
-                success: function (result,status,xhr) {
-                    console.log(result); 
-                    news = result;   
-                },
-                error : function(e) {
-                    console.log(e);
-                    alert("异常！");
-                }
-            })
+        showArticle:function (event) {
+            var button = $(event.relatedTarget);
+            console.log(button);
         }
     }
 })

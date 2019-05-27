@@ -48,15 +48,20 @@ public class UserController {
             rs.setStatus("failed");
         }
         else{
-            session.setAttribute("uname",uname);
-            session.setAttribute("level",String.valueOf(checkUser.getLevel()));
-            session.setAttribute("uid",String.valueOf(checkUser.getUid()));
-            Cookie cookie = new Cookie("SESSIONID",session.getId());
-//            Cookie cookie = new Cookie("uname",uname);
-//            Cookie typeCookie = new Cookie("level",String.valueOf(checkUser.getLevel()));
+
+            Cookie cookie = new Cookie("SESSIONID",request.getSession().getId());
+            request.getSession().setAttribute("uname", uname);
+            request.getSession().setAttribute("uid", checkUser.getUid());
+            request.getSession().setAttribute("level", checkUser.getLevel());
+            Cookie typeCookie = new Cookie("level",String.valueOf(checkUser.getLevel()));
 //            Cookie idCookie   = new Cookie("uid",String.valueOf(checkUser.getUid()));
             cookie.setPath("/");
+            typeCookie.setPath("/");
+//            idCookie.setPath("/");
             response.addCookie(cookie);
+            response.addCookie(typeCookie);
+//            response.addCookie(idCookie);
+
             response.setHeader("REDIRECT","REDIRECT");
             response.setHeader("CONTEXTPATH","index.html");
             rs.setStatus("succeed");

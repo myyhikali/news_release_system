@@ -1,5 +1,7 @@
 package com.zucc.doublefish.news.control;
 
+import com.zucc.doublefish.news.dao.ArticleDao;
+import com.zucc.doublefish.news.listener.SessionListener;
 import com.zucc.doublefish.news.pojo.Article;
 import com.zucc.doublefish.news.pojo.Result;
 import com.zucc.doublefish.news.pojo.User;
@@ -25,18 +27,25 @@ public class EditorController {
 
     @RequestMapping("/save/{cid}")
     @ResponseBody
-    public Result save(HttpServletRequest request, HttpServletResponse response,@PathVariable("cid") int cid) throws ServletException, IOException {
+
+    public Result save(HttpServletRequest request, HttpServletResponse response,@PathVariable("cid") int cid,@RequestBody Result contentJson) throws ServletException, IOException {
+
         String title=request.getParameter("title");
-        byte[] content=request.getParameter("content").getBytes();
+        System.out.println(30);
+        System.out.println(contentJson.getContent());
+        byte[] content=contentJson.getContent().getBytes();
+        System.out.println(contentJson.getContent().getBytes());
         String state=request.getParameter("state");
 
 
         Cookie cookies[]= request.getCookies();
+        HttpSession session;
         String uid=null;
         Result rs = new Result();
         for(Cookie c:cookies){
-            if(c.getName().equals("uid")){
-                uid=c.getValue();
+            if(c.getName().equals("SESSIONID")){
+                session = SessionListener.sessionMap.get(c.getValue());
+                uid = (String)session.getAttribute("uid");
             }
         }
         if(title.equals("")||content.equals("")){
@@ -61,11 +70,21 @@ public class EditorController {
         return rs;
     }
 
-    @RequestMapping("/{uid}/article")
+    @RequestMapping("/article")
     @ResponseBody
-    public List<Article> findEditorArticles(@PathVariable("uid") int uid){
+    public List<Article> findEditorArticles(HttpServletRequest request, HttpServletResponse response){
+        int uid = -1;
+        Cookie cookies[] = request.getCookies();
+        for(Cookie cookie:cookies){
+            if(cookie.getName().equals("SESSIONID")){
+                uid = Integer.parseInt((String)SessionListener.sessionMap.get(cookie.getValue()).getAttribute("uid"));
+            }
+        }
         return articleService.findAllArticlesByUserid(uid);
     }
 
 
 }
+
+
+

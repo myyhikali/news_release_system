@@ -14,6 +14,7 @@
     <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
     <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/fileinput.min.css" rel="stylesheet">
 
 </head>
 
@@ -85,7 +86,6 @@
                         </a>
                     </li>
                 </ul>
-
             </nav>
         </div>
         <div class="row wrapper border-bottom white-bg page-heading">
@@ -105,15 +105,19 @@
             <form class="m-t" role="form" id="editormassage">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title" style="height: 160px">
+                        <div class="ibox-title" style="height: 150px">
                             <h3 class="text-warning">文章标题:</h3><input placeholder="请输入你的标题" name="title" id="atitle">
                             <h3 class="text-success">栏目类型</h3>
                             <select class="form-control" style="width: 10%" v-model="cid" @change="getColumnSelected"> 
                                 <option :value="column.cid" v-for="column in columns" v-text="column.cname"></option>
                             </select>
                         </div>
+                        <div>
+                            <h3 class="text-danger">上传封面图片</h3>
+                            <input type="file" class="file col-lg-4" id="uploadfile" style="width: 10px;height: 10px">
+                        </div>
                         <div class="ibox-content no-padding">
-                            <div class="summernote" name="content" id="content"><h3>在此进行编辑你的文章</h3></div>
+                            <div class="summernote"  name="content" id="content"><h3>在此进行编辑你的文章</h3></div>
                         </div>
                     </div>
                 </div>
@@ -126,11 +130,8 @@
                     </div>
                 </div>
             </form>
-
         </div>
-
     </div>
-
 </div>
 </div>
 
@@ -147,15 +148,44 @@
 <script src="js/plugins/pace/pace.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="editor.js"></script>
-
+<script src="js/fileinput.min.js"></script>
 <!-- SUMMERNOTE -->
 <script src="js/plugins/summernote/summernote.min.js"></script>
 
 <script>
     $(document).ready(function(){
 
-        $('.summernote').summernote();
+        $('.summernote').summernote(
+            {
+                height:800,
+                maxHeight:null
+            }
+        );
 
+    });
+
+    $("#uploadfile").fileinput({
+        language: 'zh', //设置语言
+        uploadUrl: "./list.json", //上传的地址(访问接口地址)
+        allowedFileExtensions: ['jpg', 'png'],//接收的文件后缀
+        //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+        uploadAsync: true, //默认异步上传
+        showUpload: true, //是否显示上传按钮
+        showRemove : true, //显示移除按钮
+        showPreview : true, //是否显示预览
+        showCaption: false,//是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        dropZoneEnabled: false,//是否显示拖拽区域
+        minImageWidth: 50, //图片的最小宽度
+        minImageHeight: 50,//图片的最小高度
+        // maxImageWidth: 1000,//图片的最大宽度
+        // maxImageHeight: 1000,//图片的最大高度
+        //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+        maxFileCount: 1, //表示允许同时上传的最大文件个数
+        enctype: 'multipart/form-data',
+        validateInitialCount:true,
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！"
     });
 </script>
 

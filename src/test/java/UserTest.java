@@ -15,7 +15,9 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 
 import java.util.Date;
 import java.util.List;
-
+import org.apache.commons.lang3.StringEscapeUtils;
+//import org.apache.commons.lang3.StringUtils;
+//import org.apache.commons.lang.StringEscapeUtils;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class UserTest {
@@ -27,6 +29,17 @@ public class UserTest {
     private ArticleService articleService;
     @Test
     public void test(){
+//        Article article=articleService.findArticleByArticleid(222);
+//        System.out.println(article.getTitle());
+//        System.out.println(article.getContent());
+//        System.out.println(article.getContent().toString());
+//        System.out.println(StringEscapeUtils.escapeHtml4(article.getContent().toString())
+//        );
+        String s=" <h3>在此进行编辑你的文章</h3>";
+        byte[] bytes=s.getBytes();
+        System.out.println(bytes);
+        String s1=new String(bytes);
+        System.out.println(s1);
 
     }
 }
