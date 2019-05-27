@@ -22,7 +22,7 @@ function getArticles(cid){
         url: "http://localhost:10080/columns/"+cid ,//url
         dataType: "json",//预期服务器返回
         success: function (result,status,xhr) {
-            var table = document.querySelector("#readertbody");
+            var table = document.querySelector("#readertable");
             table.innerText = "";
 
             for(var i =0;i<result.length;i++){
@@ -59,6 +59,10 @@ var app = new Vue({
         chooseColumns:function(event){
             console.log(event.target.attributes[0].nodeValue);
             getArticles(event.target.attributes[0].nodeValue);
+        },
+        showArticle:function (event) {
+            var button = $(event.relatedTarget);
+            console.log(button);
         }
     }
 })

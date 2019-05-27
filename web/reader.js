@@ -49,6 +49,14 @@ function getArticles(cid){
     })
 };
 
+function showArticle (event) {
+    var button = $(event.relatedTarget);
+    console.log(button);
+
+    window.localStorage.setItem("aid",button.data("aid"));
+    window.location.href = "sample.html";
+}
+
 
 var app = new Vue({
     el:"#app",
@@ -59,6 +67,7 @@ var app = new Vue({
         chooseColumns:function(event){
             console.log(event.target.attributes[0].nodeValue);
             getArticles(event.target.attributes[0].nodeValue);
-        }
+        },
+
     }
 })

@@ -119,30 +119,21 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>001</td>
-                                    <td>🦊要等到姑娘呀</td>
-                                    <td><code>体育</code></td>
-                                    <td><code>坤坤</code></td>
-                                    <td><code>待审核</code></td>
+                                <tr v-for="article in articles">
+                                    <td v-text="article.aid"></td>
+                                    <td v-text="article.title"></td>
+                                    <td><code v-text="article.cname"></code></td>
+                                    <td><code v-text="article.uname"></code></td>
+                                    <td><code v-text="article.state"></code></td>
                                     <td>
                                         <div class="center-block">
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal1">上传</button>
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#publishModal" v-bind:data-aid="article.aid" v-show="article.state !== 'published'">上传</button>
                                             <a class="btn btn-default" href="editor.html">编辑</a>
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal2">删除</button>
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#deleteModal"  v-bind:data-aid="article.aid" >删除</button>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <code>fullscreen</code>
-                                    </td>
-                                    <td><code>object</code></td>
-                                    <td>包含 <code>enable</code> (<code>bool</code>) 和 <code>icons</code> (<code>object</code>) 键</td>
-                                    <td>
-                                        <code>fullscreen</code>
-                                    </td>
-                                </tr>
+                            
                                 </tbody>
                             </table>
 
@@ -157,7 +148,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -196,7 +187,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -229,6 +220,9 @@
 <!-- Bootstrap markdown -->
 <script src="js/plugins/bootstrap-markdown/bootstrap-markdown.js"></script>
 <script src="js/plugins/bootstrap-markdown/markdown.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="editor_article_manage.js"></script>
 
 </body>
 
