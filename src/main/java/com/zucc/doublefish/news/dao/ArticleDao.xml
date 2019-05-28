@@ -4,7 +4,7 @@
 
 <mapper namespace="com.zucc.doublefish.news.dao.ArticleDao">
     <select id="findAllArticles" resultType="com.zucc.doublefish.news.pojo.Article">
-        select * from table_article
+        select * from table_article ORDER BY time desc
     </select>
 
     <select id="findArticleByArticleid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">
@@ -20,7 +20,7 @@
     </select>
 
     <select id="findAllArticlesByColumnid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">
-        select aid,a.eid,title,a.state,a.content,a.cid,a.time,b.uname from table_article a left join table_user b on (a.eid=b.uid) where cid=#{cid}
+        select aid,a.eid,title,a.state,a.content,a.cid,a.time,b.uname from table_article a left join table_user b on (a.eid=b.uid) where cid=#{cid} ORDER BY a.time desc
     </select>
 
     <insert id="insertArticle" useGeneratedKeys="true" parameterType="com.zucc.doublefish.news.pojo.Article">

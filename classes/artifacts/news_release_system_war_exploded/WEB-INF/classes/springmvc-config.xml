@@ -15,7 +15,18 @@
         ">
     <context:component-scan base-package="com.zucc.doublefish.news.control"/>
     <mvc:annotation-driven/>
+    <mvc:interceptors>
 
+        <mvc:interceptor>
+            <mvc:mapping path="/manage/**"/>
+            <bean class="com.zucc.doublefish.news.interceptor.ManageInterceptor"></bean>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/editor/**"/>
+            <bean class="com.zucc.doublefish.news.interceptor.EditorInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 </beans>

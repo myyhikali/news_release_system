@@ -1,4 +1,3 @@
-
 window.onload =  function(){
     $.ajax({
         xhrFields: {
@@ -15,7 +14,7 @@ window.onload =  function(){
             console.log(e);
             alert("异常！");
         }
-    })
+    });
     getArticles(1);
 };
 
@@ -28,27 +27,38 @@ function getArticles(cid){
         url: "http://localhost:10080/columns/"+cid ,//url
         dataType: "json",//预期服务器返回
         success: function (result,status,xhr) {
+            var newtext=document.querySelector("#NewText");
+            newtext.innerText="";
+            for(var i=3;i<result.length&&i<9;i++){
+                console.log(i);
+                console.log(result[i]);
+                var a=document.createElement("a");
+                var h=document.createElement("h2");
+                h.textContent=result[i].title;
+                a.appendChild(h);
+                a.onclick=showArticle(result[i].aid);
+                newtext.appendChild(a);
+            }
+            console.log(i);
+
             var table = document.querySelector("#readertable");
             table.innerText = "";
-
-            for(var i =0;i<result.length;i++){
+            for(var i =9;i<result.length;i++){
                 console.log(result[i]);
-
                 var t = document.createElement("tr");
                 var title = document.createElement("td");
-                var content = document.createElement("td");
+                // var content = document.createElement("td");
                 var editor = document.createElement("td");
                 var time = document.createElement("td");
 
                 title.textContent = result[i].title;
-                content.textContent = result[i].content;
-                content.style = "max-width: 200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;";
+                // content.textContent = result[i].content;
+                // content.style = "max-width: 200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;";
                 editor.textContent = result[i].uname;
                 time.textContent = formatTime(result[i].time);
 
-
                 t.appendChild(title);
-                t.appendChild(content);
+                // t.appendChild(content);
                 t.appendChild(editor);
                 t.appendChild(time);
                 t.onclick = showArticle(result[i].aid);

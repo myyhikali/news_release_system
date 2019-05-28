@@ -2,6 +2,9 @@ window.onload =  function(){
     $.ajax({
         type: "GET",//方法类型
         url: "http://localhost:10080/columns" ,//url
+        xhrFields: {
+            withCredentials: true
+        },
         dataType: "json",//预期服务器返回
         success: function (result,status,xhr) {
             console.log(result);
@@ -24,7 +27,7 @@ function save(){
             withCredentials: true
         },
         type: "POST",//方法类型
-        url: "http://localhost:10080/editor/save?state="+ state+"&title="+title,//url
+        url: "http://localhost:10080/editor/save/"+app.cid+"/?state="+ state+"&title="+title,//url
         dataType: "json",//预期服务器返回的数据类型
         data: JSON.stringify(new result("succeed",content) ),
         contentType: "application/json",

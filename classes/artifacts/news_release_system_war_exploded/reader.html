@@ -24,16 +24,17 @@
     .carousel .item {
         height: 300px;
         width: 500px;
-        background-color: #777;
+        /*background-color: #777;*/
     }
-    .carousel-inner > .item > img {
+    .carousel-inner > .item > a > img {
         position: absolute;
         top: 0;
         left: 0;
         min-width: 100%;
         height: 300px;
-        width: 500px;
-    }</style>
+        width: 300px;
+    }
+</style>
 
 <div id="wrapper">
 
@@ -113,7 +114,7 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="container-fluid col-lg-6">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <div id="carousel-example-generic" style="height: 300px;width: 500px" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -123,14 +124,25 @@
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
-                        <div class="item active ">
-                            <img src="img/rails_logo.png" class="img-responsive" alt="First slide">
+                        <div class="item active">
+                            <a href="index.html">
+                                <img src="img/p3.jpg" class="img img-responsive" alt="First slide">
+                            </a>
+                            <div class="carousel-caption">标题 3</div>
                         </div>
+
                         <div class="item">
-                            <img src="img/p3.jpg" class="img-responsive" alt="Second slide">
+                            <a href="index.html">
+                                <img src="img/p3.jpg" class="img img-responsive" alt="Second slide">
+                            </a>
+                            <div class="carousel-caption">标题 3</div>
                         </div>
+
                         <div class="item">
-                            <img src="img/p4.jpg" class="img-responsive" alt="Third slide">
+                            <a href="index.html">
+                                <img src="img/p4.jpg" class="img img-responsive" alt="Third slide">
+                            </a>
+                            <div class="carousel-caption">标题 3</div>
                         </div>
                     </div>
 
@@ -145,37 +157,44 @@
                     </a>
                 </div>
             </div>
-            <div class="container-fluid col-lg-6">
-                <a class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</a>
-                <br><br>
-                <a class="text-primary">Nullam id dolor id nibh ultricies vehicula ut id elit..</a>
-                <br><br>
-                <a class="text-success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</a>
-                <br><br>
-                <a class="text-info">.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</a>
-                <br><br>
-                <a class="text-warning">.Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</a>
-                <br><br>
-                <a class="text-danger">Duis mollis, est non commodo luctus, nisi erat porttitor ligula..</a>
-                <br><br>
+            <div class="container-fluid col-lg-5">
+                <a class="text-muted" href="index.html">
+                    <h2><strong>Fusce dapibus, tellus ac cursus</strong></h2>
+                </a>
+                <a class="text-primary">
+                    <h2><strong>Fusce dapibus, tellus ac cursus</strong></h2>
+                </a>
+                <a class="text-success">
+                    <h2><strong>Fusce dapibus, tellus ac cursus</strong></h2>
+                </a>
+                <a class="text-info">
+                    <h2><strong>Fusce dapibus, tellus ac cursus</strong></h2>
+                </a>
+                <a class="text-warning">
+                    <h2><strong>Fusce dapibus, tellus ac cursus</strong></h2>
+                </a>
+                <a class="text-danger">
+                    <h2><strong>Fusce dapibus, tellus ac cursus</strong></h2>
+                </a>
             </div>
             <div class="row">
-                <!--dataTables-example-->
+                <!---->
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <div class="table-responsive">
-                                <table id="readertable" class="table table-striped table-bordered table-hover dataTables-example" >
+                                <table  class="table table-striped table-bordered table-hover dataTables-example " >
                                     <thead>
                                     <tr>
                                         <th>标题</th>
-                                        <th>简介</th>
+                                        <!--<th>简介</th>-->
                                         <th>编辑者</th>
-                                        <th>为啥</th>
+                                        <th>发布时间</th>
+
                                     </tr>
                                     </thead>
 
-                                    <tbody>
+                                    <tbody id="readertable">
                                         <!--<tr class="gradeA" v-for="new in news"  v-bind:aid="new.aid" >-->
                                             <!--<td v-text="new.title"></td>-->
                                             <!--<td style="max-width: 110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" >abc</td>-->
@@ -208,14 +227,14 @@
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<!--<script src="reader.js"></script>-->
+<script src="reader.js"></script>
 
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function(){
         $('.dataTables-example').DataTable({
-            // pageLength: 10,
-            pagination: true,
+            pageLength: 10,
+             // pagination: true,
             pageSize: 10,
             search: true
             // responsive: true,
