@@ -1,9 +1,7 @@
-import com.zucc.doublefish.news.pojo.Article;
-import com.zucc.doublefish.news.pojo.ArticleModify;
-import com.zucc.doublefish.news.pojo.Column;
-import com.zucc.doublefish.news.pojo.User;
+import com.zucc.doublefish.news.pojo.*;
 import com.zucc.doublefish.news.service.ArticleService;
 import com.zucc.doublefish.news.service.ColumnService;
+import com.zucc.doublefish.news.service.PictureService;
 import com.zucc.doublefish.news.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +25,8 @@ public class UserTest {
     private ColumnService columnService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private PictureService pictureService;
     @Test
     public void test(){
 //        Article article=articleService.findArticleByArticleid(222);
@@ -35,11 +35,17 @@ public class UserTest {
 //        System.out.println(article.getContent().toString());
 //        System.out.println(StringEscapeUtils.escapeHtml4(article.getContent().toString())
 //        );
-        String s=" <h3>在此进行编辑你的文章</h3>";
-        byte[] bytes=s.getBytes();
-        System.out.println(bytes);
-        String s1=new String(bytes);
-        System.out.println(s1);
+//        String s=" <h3>在此进行编辑你的文章</h3>";
+//        byte[] bytes=s.getBytes();
+//        System.out.println(bytes);
+//        String s1=new String(bytes);
+//        System.out.println(s1);
+//        Picture picture = pictureService.findPicturesByAid(1);
+//        System.out.println(picture.getPid());
+        Picture picture =new Picture();
+        picture.setAid(1);
+        picture.setPic("111124".getBytes());
+        pictureService.insertPicture(picture);
 
     }
 }

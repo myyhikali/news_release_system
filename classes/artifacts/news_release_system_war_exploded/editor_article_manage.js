@@ -1,6 +1,7 @@
-var eid ;
+
 
 window.onload = function(){
+    var level;
     var cookies = document.cookie.split("; ");
     
     var win = window;
@@ -11,15 +12,13 @@ window.onload = function(){
         var name = cookies[i].split("=")[0];
         if(name==="level")
         {
-        var level = parseInt(cookies[i].split("=")[1]);
+        level = parseInt(cookies[i].split("=")[1]);
         
         if(level!=1)
             win.location.href="login.html";
         }
-        if(name==="uid")
-            eid = parseInt(cookies[i].split("=")[1]);
     }
-    if(eid == undefined)
+    if(level == undefined)
         win.location.href="login.html";
     else{
         getEditorArticles();
@@ -45,7 +44,7 @@ function changeArticleState(aid,state){
 function getEditorArticles(){
     $.ajax({
         type: "GET",  
-        url: "http://localhost:10080/editor/"+eid+"/article" ,
+        url: "http://localhost:10080/editor/article" ,
         dataType: "json",
         success: function (result,status,xhr) {
             console.log(result);    

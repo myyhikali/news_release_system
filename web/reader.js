@@ -33,6 +33,7 @@ function getArticles(cid){
 
             for(var i =0;i<result.length;i++){
                 console.log(result[i]);
+
                 var t = document.createElement("tr");
                 var title = document.createElement("td");
                 var content = document.createElement("td");
