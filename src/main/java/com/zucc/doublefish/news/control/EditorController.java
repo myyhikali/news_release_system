@@ -31,7 +31,7 @@ public class EditorController {
     public Result save(HttpServletRequest request, HttpServletResponse response,@PathVariable("cid") int cid,@RequestBody Result contentJson) throws ServletException, IOException {
 
         String title=request.getParameter("title");
-        System.out.println(30);
+
         System.out.println(contentJson.getContent());
         byte[] content=contentJson.getContent().getBytes();
         System.out.println(contentJson.getContent().getBytes());
@@ -40,12 +40,12 @@ public class EditorController {
 
         Cookie cookies[]= request.getCookies();
         HttpSession session;
-        String uid=null;
+        int uid=-1;
         Result rs = new Result();
         for(Cookie c:cookies){
             if(c.getName().equals("SESSIONID")){
                 session = SessionListener.sessionMap.get(c.getValue());
-                uid = (String)session.getAttribute("uid");
+                uid = (Integer)session.getAttribute("uid");
             }
         }
         if(title.equals("")||content.equals("")){
@@ -60,7 +60,7 @@ public class EditorController {
             article.setState(state);
             article.setContent(content);
             article.setTitle(title);
-            article.setEid(Integer.parseInt(uid));
+            article.setEid(uid);
             article.setCid(cid);
             articleService.insertArticle(article);
             response.setHeader("REDIRECT","REDIRECT");
@@ -77,13 +77,23 @@ public class EditorController {
         Cookie cookies[] = request.getCookies();
         for(Cookie cookie:cookies){
             if(cookie.getName().equals("SESSIONID")){
-                uid = Integer.parseInt((String)SessionListener.sessionMap.get(cookie.getValue()).getAttribute("uid"));
+                uid = (Integer)SessionListener.sessionMap.get(cookie.getValue()).getAttribute("uid");
             }
         }
+        System.out.println("uid"+uid);
         return articleService.findAllArticlesByUserid(uid);
     }
 
 
+    @RequestMapping("/article/{aid}/{state}")
+    @ResponseBody
+    public Result allowPublish(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid,@PathVariable("state") String state){
+        Result rs = new Result();
+
+        articleService.changeArticleStateByArticleid(aid,state);
+        rs.setStatus("succeed");
+        return rs;
+    }
 }
 
 

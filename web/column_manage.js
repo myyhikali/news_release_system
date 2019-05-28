@@ -47,12 +47,13 @@ function saveChanges(element){
     var cname = model.find(".modal-body input").val();
     var cid = model.find(".modal-body a").text();
 
-    console.log(cid+cname); 
+    console.log(document.cookie); 
 
     $.ajax({
         xhrFields: {
             withCredentials: true
         },
+        crossDomain: true,
         type: "PUT",  
         url: "http://localhost:10080/manage/modifycolumn?cid="+cid+"&cname="+cname,
         dataType: "json",
@@ -78,6 +79,7 @@ function addColumn(){
         xhrFields: {
             withCredentials: true
         },
+        crossDomain: true,
         type: "POST",  
         url: "http://localhost:10080/manage/addcolumn?cname="+cname,
         dataType: "json",
