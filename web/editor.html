@@ -112,7 +112,7 @@
                                 <option :value="column.cid" v-for="column in columns" v-text="column.cname"></option>
                             </select>
                         </div>  
-                        <div class="col-lg-offset-4">
+                        <div>
                             <h3 class="text-danger">上传封面图片</h3>
                             <input type="file" class="file col-lg-4" id="uploadfile" style="width: 10px;height: 10px">
                         </div>
@@ -166,8 +166,8 @@
 
     $("#uploadfile").fileinput({
         language: 'zh', //设置语言
-        uploadUrl: "./list.json", //上传的地址(访问接口地址)
-        allowedFileExtensions: ['jpg', 'png'],//接收的文件后缀
+        uploadUrl: "localhost:10080/editor/uploadpicture", //上传的地址(访问接口地址)
+        allowedFileExtensions: ['jpg', 'png','jpeg'],//接收的文件后缀
         //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
         uploadAsync: true, //默认异步上传
         showUpload: true, //是否显示上传按钮

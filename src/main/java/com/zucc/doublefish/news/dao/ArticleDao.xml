@@ -20,7 +20,7 @@
     </select>
 
     <select id="findAllArticlesByColumnid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">
-        select aid,a.eid,title,a.state,a.content,a.cid,a.time,b.uname from table_article a left join table_column b on (a.eid=b.uid) where cid=#{cid}
+        select aid,a.eid,title,a.state,a.content,a.cid,a.time,b.uname from table_article a left join table_user b on (a.eid=b.uid) where cid=#{cid}
     </select>
 
     <insert id="insertArticle" useGeneratedKeys="true" parameterType="com.zucc.doublefish.news.pojo.Article">
