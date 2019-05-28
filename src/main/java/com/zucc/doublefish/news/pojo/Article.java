@@ -1,5 +1,7 @@
 package com.zucc.doublefish.news.pojo;
 
+import java.util.Date;
+
 public class Article {
     int aid;
     int eid;
@@ -10,6 +12,7 @@ public class Article {
     String uname;
     byte[] content;
     String content1;
+    Date time;
 
     public String getContent1() {
         return content1;
@@ -82,5 +85,13 @@ public class Article {
 
     public void setUname(String uname) {
         this.uname = uname;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 }

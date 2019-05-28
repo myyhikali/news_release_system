@@ -2,6 +2,9 @@ window.onload = getArticlesPublished();
 
 function getArticlesPublished(){
     $.ajax({
+        xhrFields: {    
+            withCredentials: true
+        },
         type: "GET",  
         url: "http://localhost:10080/manage/article" ,
         dataType: "json",
@@ -18,6 +21,9 @@ function getArticlesPublished(){
 
 function changeArticleState(aid,state){
     $.ajax({
+        xhrFields: {
+            withCredentials: true
+        },
         type: "PUT",  
         url: "http://localhost:10080/manage/article/"+aid+"/"+state ,
         dataType: "json",

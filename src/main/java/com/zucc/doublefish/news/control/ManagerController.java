@@ -1,5 +1,6 @@
 package com.zucc.doublefish.news.control;
 
+import com.zucc.doublefish.news.listener.SessionListener;
 import com.zucc.doublefish.news.pojo.Article;
 import com.zucc.doublefish.news.pojo.Column;
 import com.zucc.doublefish.news.pojo.Result;
@@ -7,10 +8,7 @@ import com.zucc.doublefish.news.service.ArticleService;
 import com.zucc.doublefish.news.service.ColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +34,7 @@ public class ManagerController {
     @ResponseBody
     public Result allowPublish(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid,@PathVariable("state") String state){
         Result rs = new Result();
+
         articleService.changeArticleStateByArticleid(aid,state);
         rs.setStatus("succeed");
         return rs;
@@ -48,8 +47,10 @@ public class ManagerController {
         int cid = Integer.parseInt(request.getParameter("cid"));
         String cname = request.getParameter("cname");
 
-        columnService.updateColumn(cid,cname);
+
+        columnService.updateColumn(cid, cname);
         rs.setStatus("succeed");
+
         return rs;
     }
 
@@ -60,8 +61,8 @@ public class ManagerController {
         String cname = request.getParameter("cname");
         int uid=-1;
         for(Cookie cookie:request.getCookies()){
-            if(cookie.getName().equals("uid")){
-                uid = Integer.parseInt(cookie.getValue());
+            if(cookie.getName().equals("SESSIONID")){
+                uid = (Integer) SessionListener.sessionMap.get(cookie.getValue()).getAttribute("uid");
             }
         }
 

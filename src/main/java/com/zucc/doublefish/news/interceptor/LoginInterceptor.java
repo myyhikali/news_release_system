@@ -1,6 +1,7 @@
 package com.zucc.doublefish.news.interceptor;
 
 import com.zucc.doublefish.news.listener.SessionListener;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,11 +12,15 @@ import javax.servlet.http.HttpSession;
 
 public class LoginInterceptor  implements HandlerInterceptor {
     public boolean preHandle(javax.servlet.http.HttpServletRequest httpServletRequest, javax.servlet.http.HttpServletResponse httpServletResponse, Object o) throws Exception {
-        
+
+        if(httpServletRequest.getMethod().equals("OPTIONS"))
+        {
+            return true;
+        }
         for(Cookie cookie:httpServletRequest.getCookies()){
             if(cookie.getName().equals("SESSIONID")){
                 HttpSession session = SessionListener.sessionMap.get(cookie.getValue());
-                if(session.getAttribute("uname")==null){
+                if(session.getAttribute("uid")==null){
                     return false;
                 }
             }
