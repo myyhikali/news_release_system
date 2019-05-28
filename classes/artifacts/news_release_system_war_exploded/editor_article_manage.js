@@ -27,12 +27,15 @@ window.onload = function(){
 
 function changeArticleState(aid,state){
     $.ajax({
+        xhrFields: {    
+            withCredentials: true
+        },
         type: "PUT",  
-        url: "http://localhost:10080/manage/article/"+aid+"/"+state ,
+        url: "http://localhost:10080/editor/article/"+aid+"/"+state ,
         dataType: "json",
         success: function (result,status,xhr) {
-            console.log(result); 
-            getArticlesPublished(); 
+            console.log(result);
+            getEditorArticles();
         },
         error : function(e) {
             console.log(e);
@@ -43,6 +46,9 @@ function changeArticleState(aid,state){
 
 function getEditorArticles(){
     $.ajax({
+        xhrFields: {    
+            withCredentials: true
+        },
         type: "GET",  
         url: "http://localhost:10080/editor/article" ,
         dataType: "json",
@@ -77,7 +83,7 @@ $('#deleteModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var aid = button.data('aid') 
 
-    document.querySelector('#allow').onclick=function(event){
+    document.querySelector('#delete').onclick=function(event){
         changeArticleState(aid,"deleted");
     }
 })

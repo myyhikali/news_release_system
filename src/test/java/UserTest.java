@@ -42,10 +42,16 @@ public class UserTest {
 //        System.out.println(s1);
 //        Picture picture = pictureService.findPicturesByAid(1);
 //        System.out.println(picture.getPid());
-        Picture picture =new Picture();
-        picture.setAid(1);
-        picture.setPic("111124".getBytes());
-        pictureService.insertPicture(picture);
+//        Picture picture =new Picture();
+//        picture.setAid(1);
+//        picture.setPic("111124".getBytes());
+//        pictureService.insertPicture(picture);
+        List<Article> list=articleService.findAllArticlesByColumnid(1);
+        for(Article article:list){
+            System.out.println(article.getTime());
+            System.out.println(article.getAid());
+        }
+        System.out.println();
 
     }
 }

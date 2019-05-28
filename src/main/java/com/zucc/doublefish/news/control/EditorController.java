@@ -89,11 +89,12 @@ public class EditorController {
     @ResponseBody
     public Result allowPublish(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid,@PathVariable("state") String state){
         Result rs = new Result();
-
         articleService.changeArticleStateByArticleid(aid,state);
         rs.setStatus("succeed");
         return rs;
     }
+
+
 }
 
 
