@@ -8,7 +8,17 @@
         <!--<result-->
     <!--</resultMap>-->
     <select id="findPicturesByAid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Picture">
-        select * from table_picture where uname=#{aid}
+        select * from table_picture where aid=#{aid}
     </select>
 
+    <!--insertPictureByAid-->
+    <insert id="insertPicture" useGeneratedKeys="true"  parameterType="com.zucc.doublefish.news.pojo.Picture">
+        insert into table_picture(aid,pic) value ( #{aid},#{pic});
+    </insert>
+
+
+    <!--deletepictureByAid-->
+    <delete id="deletepictureByAid" parameterType="Integer">
+        DELETE FROM table_picture WHERE aid=#{aid}
+    </delete>
 </mapper>

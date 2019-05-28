@@ -27,6 +27,7 @@ function getArticles(cid){
 
             for(var i =0;i<result.length;i++){
                 console.log(result[i]);
+
                 var t = document.createElement("tr");
                 var title = document.createElement("td");
                 var content = document.createElement("td");
@@ -49,6 +50,14 @@ function getArticles(cid){
     })
 };
 
+function showArticle (event) {
+    var button = $(event.relatedTarget);
+    console.log(button);
+
+    window.localStorage.setItem("aid",button.data("aid"));
+    window.location.href = "sample.html";
+}
+
 
 var app = new Vue({
     el:"#app",
@@ -60,9 +69,6 @@ var app = new Vue({
             console.log(event.target.attributes[0].nodeValue);
             getArticles(event.target.attributes[0].nodeValue);
         },
-        showArticle:function (event) {
-            var button = $(event.relatedTarget);
-            console.log(button);
-        }
+
     }
 })

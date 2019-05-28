@@ -160,6 +160,7 @@
                 <br><br>
             </div>
             <div class="row">
+                <!--dataTables-example-->
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
@@ -170,18 +171,19 @@
                                         <th>标题</th>
                                         <th>简介</th>
                                         <th>编辑者</th>
-
+                                        <th>为啥</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
-                                        <tr class="gradeA" v-for="new in news"  v-bind:aid="new.aid">
-                                            <td v-text="new.title"></td>
-                                            <td style="max-width: 110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-                                                <a v-text="new.contnet" v-click="showArticle()"></a>
-                                            </td>
-                                            <td v-text="new.eid"></td>
-                                        </tr>
+                                        <!--<tr class="gradeA" v-for="new in news"  v-bind:aid="new.aid" >-->
+                                            <!--<td v-text="new.title"></td>-->
+                                            <!--<td style="max-width: 110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" >abc</td>-->
+                                            <!--<td>-->
+                                                <!--<a class="text-muted" href="sample.html" v-text="new.contnet" onclick="showArticle()"></a>-->
+                                            <!--</td>-->
+                                            <!--<td v-text="new.eid"></td>-->
+                                        <!--</tr>-->
 
                                     </tbody>
                                 </table>
@@ -206,16 +208,19 @@
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script src="reader.js"></script>
+<!--<script src="reader.js"></script>-->
 
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function(){
         $('.dataTables-example').DataTable({
-            pageLength: 10,
-            responsive: true,
+            // pageLength: 10,
+            pagination: true,
+            pageSize: 10,
+            search: true
+            // responsive: true,
             // dom: '<"html5buttons"B>lTfgitp',
-            buttons: [
+            // buttons: [
                 // { extend: 'copy'},
                 // {extend: 'csv'},
                 // {extend: 'excel', title: 'ExampleFile'},
@@ -231,7 +236,7 @@
                 //             .css('font-size', 'inherit');
                 //     }
                 // }
-            ]
+            // ]
         });
 
     });
