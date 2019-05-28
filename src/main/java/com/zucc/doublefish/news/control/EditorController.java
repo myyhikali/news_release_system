@@ -6,16 +6,19 @@ import com.zucc.doublefish.news.pojo.Article;
 import com.zucc.doublefish.news.pojo.Result;
 import com.zucc.doublefish.news.pojo.User;
 import com.zucc.doublefish.news.service.ArticleService;
+import com.zucc.doublefish.news.service.PictureService;
 import com.zucc.doublefish.news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,6 +27,9 @@ import java.util.List;
 public class EditorController {
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private PictureService pictureService;
 
     @RequestMapping("/save/{cid}")
     @ResponseBody
@@ -91,6 +97,22 @@ public class EditorController {
         Result rs = new Result();
         articleService.changeArticleStateByArticleid(aid,state);
         rs.setStatus("succeed");
+        return rs;
+    }
+
+
+    @RequestMapping(value = "/uploadpicture",method = RequestMethod.POST)
+    @ResponseBody
+    public Result uploadPicture(HttpServletRequest request, HttpServletResponse response, @RequestParam(required = false) MultipartFile uploadFile){
+        Result rs = new Result();
+        System.out.println(uploadFile.getContentType());
+        String saveFilePath = "temp";
+        File newFile = new File(saveFilePath + "\\" + uploadFile.getOriginalFilename());
+        try {
+            uploadFile.transferTo(newFile);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         return rs;
     }
 

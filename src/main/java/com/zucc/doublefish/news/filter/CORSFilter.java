@@ -1,5 +1,9 @@
 package com.zucc.doublefish.news.filter;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.springframework.web.multipart.MultipartResolver;
+
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CORSFilter implements Filter {
+    private MultipartResolver multipartResolver = null;
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }
@@ -26,13 +31,8 @@ public class CORSFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
-//        for(Cookie cookie:request.getCookies()){
-//            if(cookie.getName().equals("editor")){
-//                filterChain.doFilter(servletRequest,servletResponse);
-//            }
-//        }
+
         filterChain.doFilter(request,response);
-        //request.getRequestDispatcher("/").forward(request,response);
     }
 
     public void destroy() {
