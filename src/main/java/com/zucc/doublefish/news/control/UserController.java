@@ -35,6 +35,8 @@ public class UserController {
     @RequestMapping("/checklogin")
     @ResponseBody
     public Result login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
         String uname = request.getParameter("username");
         String pwd   = request.getParameter("pwd");
         Result rs = new Result();
@@ -46,6 +48,7 @@ public class UserController {
             rs.setStatus("failed");
         }
         else{
+
             Cookie cookie = new Cookie("SESSIONID",request.getSession().getId());
             request.getSession().setAttribute("uname", uname);
             request.getSession().setAttribute("uid", checkUser.getUid());
@@ -58,6 +61,7 @@ public class UserController {
             response.addCookie(cookie);
             response.addCookie(typeCookie);
 //            response.addCookie(idCookie);
+
             response.setHeader("REDIRECT","REDIRECT");
             response.setHeader("CONTEXTPATH","index.html");
             rs.setStatus("succeed");
