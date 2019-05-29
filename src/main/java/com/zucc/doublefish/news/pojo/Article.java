@@ -13,6 +13,7 @@ public class Article {
     byte[] content;
     String content1;
     Date time;
+    byte[] pic;
 
     public String getContent1() {
         return content1;
@@ -93,5 +94,13 @@ public class Article {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public byte[] getPic() {
+        return pic;
+    }
+
+    public void setPic(byte[] pic) {
+        this.pic = pic;
     }
 }

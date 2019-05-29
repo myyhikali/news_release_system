@@ -29,29 +29,24 @@ public class UserTest {
     private PictureService pictureService;
     @Test
     public void test(){
-//        Article article=articleService.findArticleByArticleid(222);
-//        System.out.println(article.getTitle());
-//        System.out.println(article.getContent());
-//        System.out.println(article.getContent().toString());
-//        System.out.println(StringEscapeUtils.escapeHtml4(article.getContent().toString())
-//        );
-//        String s=" <h3>在此进行编辑你的文章</h3>";
-//        byte[] bytes=s.getBytes();
-//        System.out.println(bytes);
-//        String s1=new String(bytes);
-//        System.out.println(s1);
-//        Picture picture = pictureService.findPicturesByAid(1);
-//        System.out.println(picture.getPid());
-//        Picture picture =new Picture();
-//        picture.setAid(1);
-//        picture.setPic("111124".getBytes());
-//        pictureService.insertPicture(picture);
-        List<Article> list=articleService.findAllArticlesByColumnid(1);
-        for(Article article:list){
-            System.out.println(article.getTime());
-            System.out.println(article.getAid());
-        }
-        System.out.println();
+//        List<Article> list=articleService.findAllArticlesByColumnid(1);
+//        for(Article article:list){
+//            System.out.println(article.getTime());
+//            System.out.println(article.getAid());
+//        }
+//        System.out.println();
+        ArticleModify articleModify=new ArticleModify();
+        articleModify.setUid(1);
+        articleModify.setEstate("upload");
+        articleModify.setAid(12);
+//        articleModify.setMtime(new Date(System.currentTimeMillis()));
 
+        articleService.insertArticleModify(articleModify);
+
+//        List<ArticleModify> articleModify=articleService.findAllArticleModifiesByAid(12);
+//        for (ArticleModify articleModify1:articleModify){
+//            System.out.println(articleModify1.getMtime());
+//            System.out.println(articleModify1.getUname());
+//        }
     }
 }

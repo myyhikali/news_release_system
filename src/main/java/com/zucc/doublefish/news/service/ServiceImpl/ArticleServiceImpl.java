@@ -25,8 +25,13 @@ public class ArticleServiceImpl implements ArticleService {
         return this.articleDao.findAllArticlesByColumnid(cid);
     }
 
+
     public List<Article> findAllArticlesPublished() {
-        return articleDao.findArticlesExceptState("saved");
+        return articleDao.findArticlesWithState("checked");
+    }
+
+    public List<Article> findArticlesWithPictureByColumnid(int cid) {
+        return articleDao.findArticlesWithPictureByColumnid(cid);
     }
 
     public void insertArticle(Article article){
@@ -48,4 +53,7 @@ public class ArticleServiceImpl implements ArticleService {
         articleDao.insertArticleModify(articleModify);
     }
 
+    public List<ArticleModify> findAllArticleModifiesByAid(int aid){
+        return articleDao.findAllArticleModifiesByAid(aid);
+    }
 }

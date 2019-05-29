@@ -3,6 +3,7 @@ package com.zucc.doublefish.news.control;
 import com.zucc.doublefish.news.dao.ArticleDao;
 import com.zucc.doublefish.news.listener.SessionListener;
 import com.zucc.doublefish.news.pojo.Article;
+import com.zucc.doublefish.news.pojo.ArticleModify;
 import com.zucc.doublefish.news.pojo.Result;
 import com.zucc.doublefish.news.pojo.User;
 import com.zucc.doublefish.news.service.ArticleService;
@@ -35,6 +36,8 @@ public class EditorController {
     @ResponseBody
 
     public Result save(HttpServletRequest request, HttpServletResponse response,@PathVariable("cid") int cid,@RequestBody Result contentJson) throws ServletException, IOException {
+
+        ArticleModify articleModify = new ArticleModify();
 
         String title=request.getParameter("title");
 
@@ -72,7 +75,14 @@ public class EditorController {
             response.setHeader("REDIRECT","REDIRECT");
             response.setHeader("CONTEXTPATH","editor.html");
             rs.setStatus("succeed");
+
+            articleModify.setAid(article.getAid());
         }
+
+        articleModify.setEstate(state);
+        articleModify.setUid(uid);
+        articleService.insertArticleModify(articleModify);
+
         return rs;
     }
 
@@ -86,7 +96,7 @@ public class EditorController {
                 uid = (Integer)SessionListener.sessionMap.get(cookie.getValue()).getAttribute("uid");
             }
         }
-        System.out.println("uid"+uid);
+//        System.out.println("uid"+uid);
         return articleService.findAllArticlesByUserid(uid);
     }
 
@@ -103,6 +113,7 @@ public class EditorController {
 
     @RequestMapping(value = "/uploadpicture",method = RequestMethod.POST)
     @ResponseBody
+    @CrossOrigin
     public Result uploadPicture(HttpServletRequest request, HttpServletResponse response, @RequestParam(required = false) MultipartFile uploadFile){
         Result rs = new Result();
         System.out.println(uploadFile.getContentType());

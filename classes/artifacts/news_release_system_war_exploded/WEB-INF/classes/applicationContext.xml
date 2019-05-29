@@ -41,6 +41,14 @@
         <property name="basePackage" value="com.zucc.doublefish.news.dao"></property>
     </bean>
 
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!--<property name="uploadTempDir" value="/temp"/>　　　-->
+        <!--<property name="maxUploadSize" value="2097152"/>　　　&lt;!&ndash;最大文件容量设置为2M&ndash;&gt;-->
+        <!--<property name="maxInMemorySize" value="0"/>　　　　· &lt;!&ndash;最大的内存大小设置为0，超过0就写入磁盘&ndash;&gt;　-->
+    </bean>
+
     <!--扫描service-->
     <context:component-scan base-package="com.zucc.doublefish.news.service"></context:component-scan>
 

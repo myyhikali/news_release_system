@@ -34,7 +34,17 @@
     </update>
 
     <insert id="insertArticleModify" useGeneratedKeys="true" parameterType="com.zucc.doublefish.news.pojo.ArticleModify">
-        insert into table_article_modify(mtime,uid,eid,estate) value(#{mtime},#{uid},#{eid},#{estate});
+        insert into table_article_modify(mtime,uid,estate,aid) value(now(),#{uid},#{estate},#{aid});
     </insert>
+    <!--findAllArticleModifiesByAid-->
+
+    <select id="findAllArticleModifiesByAid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.ArticleModify">
+        select a.mid,a.mtime,a.uid,a.estate,a.aid,b.uname from table_article_modify a left join table_user b on (a.uid=b.uid) where aid=#{aid} ORDER BY a.mtime desc
+    </select>
+
+    <select id="findArticlesWithPictureByColumnid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">
+        select a.aid,title,a.state,b.pic  from table_article a left join table_picture b on(a.aid=b.aid) where a.cid=#{cid} AND a.state="checked" ORDER BY a.time desc limit 3
+    </select>
+
 
 </mapper>
