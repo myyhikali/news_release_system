@@ -123,26 +123,26 @@
                     </ol>
 
                     <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
+                    <div class="carousel-inner" id="images">
                         <div class="item active">
                             <a href="index.html">
-                                <img src="img/p3.jpg" class="img img-responsive" alt="First slide">
+                                <img v-bind:src="articlesWithPic[0].pic" class="img img-responsive" alt="First slide">
                             </a>
-                            <div class="carousel-caption">标题 3</div>
+                            <div class="carousel-caption" v-text="articlesWithPic[0].title"></div>
                         </div>
 
                         <div class="item">
                             <a href="index.html">
-                                <img src="img/p3.jpg" class="img img-responsive" alt="Second slide">
+                                <img v-bind:src="articlesWithPic[1].pic" class="img img-responsive" alt="Second slide">
                             </a>
-                            <div class="carousel-caption">标题 3</div>
+                            <div class="carousel-caption" v-text="articlesWithPic[1].title"></div>
                         </div>
 
                         <div class="item">
                             <a href="index.html">
-                                <img src="img/p4.jpg" class="img img-responsive" alt="Third slide">
+                                <img v-bind:src="articlesWithPic[2].pic" class="img img-responsive" alt="Third slide">
                             </a>
-                            <div class="carousel-caption">标题 3</div>
+                            <div class="carousel-caption" v-text="articlesWithPic[2].title"></div>
                         </div>
                     </div>
 
@@ -158,24 +158,7 @@
                 </div>
             </div>
             <div class="container-fluid col-lg-5 " id="NewText">
-                <!--<a  href="index.html">-->
-                    <!--<h2>特大小新闻ac cursu</h2>-->
-                <!--</a>-->
-                <!--<a class="text-primary">-->
-                    <!--<h2><strong>Fusce da狐狸君tellus ac cursus</strong></h2>-->
-                <!--</a>-->
-                <!--<a class="text-success">-->
-                    <!--<h2><strong>Fusce dapibus, tellus ac cursus</strong></h2>-->
-                <!--</a>-->
-                <!--<a class="text-info">-->
-                    <!--<h2><strong>Fusce dapibus, tellus ac cursus</strong></h2>-->
-                <!--</a>-->
-                <!--<a class="text-warning">-->
-                    <!--<h2><strong>Fusce dapibus, tellus ac cursus</strong></h2>-->
-                <!--</a>-->
-                <!--<a class="text-danger">-->
-                    <!--<h2><strong>Fusce dapibus, tellus ac cursus</strong></h2>-->
-                <!--</a>-->
+
             </div>
             <div class="row">
                 <!---->

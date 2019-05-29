@@ -16,4 +16,6 @@ public interface ArticleDao {
     public void deleteArticle(int aid);
     public void changeArticleStateByArticleid(Article article);
     public void insertArticleModify(ArticleModify articleModify);
+    public List<ArticleModify> findAllArticleModifiesByAid(int aid);
+    public List<Article> findArticlesWithPictureByColumnid(int cid);
 }

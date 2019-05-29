@@ -32,4 +32,10 @@ public class ColumnController {
     public List<Article> findArticleInColumn(@PathVariable("column") Integer columnId){
         return articleService.findAllArticlesByColumnid(columnId);
     }
+
+    @RequestMapping(value="/columns/{column}/latest",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Article> findLatestArticleInColumn(@PathVariable("column") Integer columnId){
+        return articleService.findArticlesWithPictureByColumnid(columnId);
+    }
 }

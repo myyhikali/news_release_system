@@ -33,6 +33,7 @@ public class UserTest {
     private PictureService pictureService;
     @Test
     public void test(){
+
 //        Article article=articleService.findArticleByArticleid(222);
 //        System.out.println(article.getTitle());
 //        System.out.println(article.getContent());
@@ -50,12 +51,20 @@ public class UserTest {
 //        picture.setAid(1);
 //        picture.setPic("111124".getBytes());
 //        pictureService.insertPicture(picture);
+  
 //        List<Article> list=articleService.findAllArticlesByColumnid(1);
 //        for(Article article:list){
 //            System.out.println(article.getTime());
 //            System.out.println(article.getAid());
 //        }
 //        System.out.println();
+
+//         ArticleModify articleModify=new ArticleModify();
+//         articleModify.setUid(1);
+//         articleModify.setEstate("upload");
+//         articleModify.setAid(12);
+//        articleModify.setMtime(new Date(System.currentTimeMillis()));
+
         FileInputStream file = null;
         byte[] bytes = new byte[0];
         try {
@@ -74,5 +83,13 @@ public class UserTest {
         picture.setPic(bytes);
         pictureService.insertPicture(picture);
 
+
+        articleService.insertArticleModify(articleModify);
+
+//        List<ArticleModify> articleModify=articleService.findAllArticleModifiesByAid(12);
+//        for (ArticleModify articleModify1:articleModify){
+//            System.out.println(articleModify1.getMtime());
+//            System.out.println(articleModify1.getUname());
+//        }
     }
 }

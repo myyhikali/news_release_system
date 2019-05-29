@@ -147,6 +147,31 @@ function upload(){
     });
 }
 
+function  getFile(event) {
+    console.log(event);
+    this.file = event.target.files[0];
+    console.log(this.file);
+}
+
+function submit(event) {
+    //阻止元素发生默认的行为
+    console.log(event);
+    event.preventDefault();
+    var formData = new FormData();
+    formData.append("file", this.file);
+    axios.post('http://localhost:10080/editor/uploadpicture', formData)
+        .then(function (response) {
+            alert(response.data);
+            console.log(response);
+            window.location.reload();
+        })
+        .catch(function (error) {
+            alert("上传失败");
+            console.log(error);
+            window.location.reload();
+        });
+}
+
 var app = new Vue({
     el:"#page-wrapper",
     data:{
@@ -155,7 +180,6 @@ var app = new Vue({
     },
     methods:{
         getColumnSelected:function(){
-           
             console.log(this.cid) ;
         }
     }

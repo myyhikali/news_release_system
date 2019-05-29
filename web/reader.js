@@ -16,6 +16,7 @@ window.onload =  function(){
         }
     });
     getArticles(1);
+    getLatestArticleWithPics(1);
 };
 
 function getArticles(cid){
@@ -71,6 +72,27 @@ function getArticles(cid){
         }
     })
 };
+
+
+function getLatestArticleWithPics(cid) {
+    $.ajax({
+        xhrFields: {
+            withCredentials: true
+        },
+        type: "GET",//方法类型
+        url: "http://localhost:10080/columns" ,//url
+        dataType: "json",//预期服务器返回
+        success: function (result,status,xhr) {
+            console.log(result);
+            app2.articlesWithPic=result;
+        },
+        error : function(e) {
+            console.log(e);
+            alert("异常！");
+        }
+    });
+}
+
 function formatTime(t)
 {
     var time = new Date(t);
@@ -105,4 +127,11 @@ var app = new Vue({
         },
 
     }
-})
+});
+
+var app2 = new Vue({
+    el:"images",
+    data:{
+        articlesWithPic:[]
+    }
+});

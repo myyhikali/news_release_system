@@ -5,7 +5,10 @@ import java.util.Date;
 public class ArticleModify {
     int mid;
     int uid;
-    int eid;
+    int aid;
+    String uname;
+    String estate;
+    Date mtime;
 
     public int getMid() {
         return mid;
@@ -23,12 +26,12 @@ public class ArticleModify {
         this.uid = uid;
     }
 
-    public int getEid() {
-        return eid;
+    public int getAid() {
+        return aid;
     }
 
-    public void setEid(int eid) {
-        this.eid = eid;
+    public void setAid(int aid) {
+        this.aid = aid;
     }
 
     public String getEstate() {
@@ -47,7 +50,14 @@ public class ArticleModify {
         this.mtime = mtime;
     }
 
-    String estate;
-    Date mtime;
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+
+
 
 }
