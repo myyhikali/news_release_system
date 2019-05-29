@@ -11,6 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -29,17 +33,56 @@ public class UserTest {
     private PictureService pictureService;
     @Test
     public void test(){
+
+//        Article article=articleService.findArticleByArticleid(222);
+//        System.out.println(article.getTitle());
+//        System.out.println(article.getContent());
+//        System.out.println(article.getContent().toString());
+//        System.out.println(StringEscapeUtils.escapeHtml4(article.getContent().toString())
+//        );
+//        String s=" <h3>在此进行编辑你的文章</h3>";
+//        byte[] bytes=s.getBytes();
+//        System.out.println(bytes);
+//        String s1=new String(bytes);
+//        System.out.println(s1);
+//        Picture picture = pictureService.findPicturesByAid(1);
+//        System.out.println(picture.getPid());
+//        Picture picture =new Picture();
+//        picture.setAid(1);
+//        picture.setPic("111124".getBytes());
+//        pictureService.insertPicture(picture);
+  
 //        List<Article> list=articleService.findAllArticlesByColumnid(1);
 //        for(Article article:list){
 //            System.out.println(article.getTime());
 //            System.out.println(article.getAid());
 //        }
 //        System.out.println();
-        ArticleModify articleModify=new ArticleModify();
-        articleModify.setUid(1);
-        articleModify.setEstate("upload");
-        articleModify.setAid(12);
+
+//         ArticleModify articleModify=new ArticleModify();
+//         articleModify.setUid(1);
+//         articleModify.setEstate("upload");
+//         articleModify.setAid(12);
 //        articleModify.setMtime(new Date(System.currentTimeMillis()));
+
+        FileInputStream file = null;
+        byte[] bytes = new byte[0];
+        try {
+            file = new FileInputStream(new File("E:\\学习\\JavaEE\\news_release_system\\web\\img\\p6.jpg"));
+            bytes  = new byte[file.available()];
+            file.read(bytes);
+            file.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Picture picture = new Picture();
+        picture.setAid(5);
+        picture.setPic(bytes);
+        pictureService.insertPicture(picture);
+
 
         articleService.insertArticleModify(articleModify);
 

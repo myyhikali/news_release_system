@@ -4,6 +4,7 @@ import com.zucc.doublefish.news.dao.ArticleDao;
 import com.zucc.doublefish.news.listener.SessionListener;
 import com.zucc.doublefish.news.pojo.Article;
 import com.zucc.doublefish.news.pojo.ArticleModify;
+import com.zucc.doublefish.news.pojo.Picture;
 import com.zucc.doublefish.news.pojo.Result;
 import com.zucc.doublefish.news.pojo.User;
 import com.zucc.doublefish.news.service.ArticleService;
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,14 +35,36 @@ public class EditorController {
     @Autowired
     private PictureService pictureService;
 
+    private String saveFilePath = "E:\\学习\\JavaEE\\news_release_system\\src\\main\\resources\\temp\\";
+
     @RequestMapping("/save/{cid}")
     @ResponseBody
-
     public Result save(HttpServletRequest request, HttpServletResponse response,@PathVariable("cid") int cid,@RequestBody Result contentJson) throws ServletException, IOException {
 
         ArticleModify articleModify = new ArticleModify();
 
         String title=request.getParameter("title");
+        String filename = request.getParameter("filename");
+
+        FileInputStream file = null;
+        byte[] bytes = new byte[0];
+        try {
+            file = new FileInputStream(new File(request.getSession().getServletContext().getRealPath("/")+"tmp/"+filename));
+            bytes  = new byte[file.available()];
+            file.read(bytes);
+            file.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Picture picture = new Picture();
+        picture.setPname(filename);
+        picture.setAid();
+        picture.setPic(bytes);
+        pictureService.insertPicture(picture);
+
 
         System.out.println(contentJson.getContent());
         byte[] content=contentJson.getContent().getBytes();
@@ -115,15 +140,21 @@ public class EditorController {
     @ResponseBody
     @CrossOrigin
     public Result uploadPicture(HttpServletRequest request, HttpServletResponse response, @RequestParam(required = false) MultipartFile uploadFile){
+    public Result uploadPicture(HttpServletRequest request, HttpServletResponse response,@RequestParam(value="file",required=false) MultipartFile uploadFile){
+
         Result rs = new Result();
-        System.out.println(uploadFile.getContentType());
-        String saveFilePath = "temp";
-        File newFile = new File(saveFilePath + "\\" + uploadFile.getOriginalFilename());
-        try {
-            uploadFile.transferTo(newFile);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        if(!uploadFile.isEmpty())
+        {
+            System.out.println(uploadFile.getOriginalFilename());
+            System.out.println(request.getSession().getServletContext().getRealPath("/"));
+            File newFile = new File(request.getSession().getServletContext().getRealPath("/")+"temp/"+uploadFile.getOriginalFilename());
+            try {
+                uploadFile.transferTo(newFile);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
+
         return rs;
     }
 
