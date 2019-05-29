@@ -1,3 +1,5 @@
+var file;
+
 window.onload =  function(){
     $.ajax({
         type: "GET",//方法类型
@@ -15,6 +17,59 @@ window.onload =  function(){
             alert("异常！");
         }
     })
+
+    document.querySelector("#uploadfile").addEventListener("change",function (event) {
+        console.log(event);
+        file = event.target.files[0];
+        console.log(file.name);
+
+        if(document.querySelector("#uploadpicture")==null)
+        {
+            var upbtn = document.createElement("button");
+            upbtn.type = "button";
+            upbtn.tabIndex = "500";
+            upbtn.id = "uploadpicture";
+            upbtn.className = "btn btn-default btn-secondary fileinput-upload fileinput-upload-button";
+            var logo = document.createElement("i");
+            logo.className="glyphicon glyphicon-upload";
+            var txt = document.createElement("span");
+            txt.className="hidden-xs";
+            txt.textContent = "提交";
+            upbtn.appendChild(logo);
+            upbtn.appendChild(txt);
+            upbtn.addEventListener("click",function (event) {
+                event.preventDefault();
+
+                var formData = new FormData();
+                formData.append("file", file);
+                console.log(formData);
+
+                $.ajax({
+                    type: "POST",//方法类型
+                    url: 'http://localhost:10080/editor/uploadpicture' ,//url
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    processData : false,
+                    data: formData,
+                    contentType: false,
+                    success: function (result,status,xhr) {
+                        console.log(result);
+                    },
+                    error : function(e) {
+                        console.log(e);
+                        alert("异常！");
+                    }
+                })
+            });
+            $(".file-input")[0].appendChild(upbtn);
+        }
+
+
+
+    })
+
+
 };
 
 function save(){
@@ -58,8 +113,6 @@ function result(status,content){
 
 }
 
-
-
 function upload(){
     var state = "published";
     var title=document.getElementById("atitle").value;
@@ -71,7 +124,7 @@ function upload(){
             withCredentials: true
         },
         type: "POST",
-        url: "http://localhost:10080/editor/save?state="+ state+"&title="+title+"&content="+content,//url
+        url: "http://localhost:10080/editor/save?state="+ state+"&title="+title+"&content="+content+"&filename="+file.name,//url
         dataType: "json",//预期服务器返回的数据类型
         success: function (result,status,xhr) {
             console.log(result);

@@ -2,8 +2,8 @@
 lib/*
 out/*
 
+target/*
+
 news_release_system.iml
 target/*
 src/main/resources/db.properties
-
-

@@ -11,6 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -46,12 +50,29 @@ public class UserTest {
 //        picture.setAid(1);
 //        picture.setPic("111124".getBytes());
 //        pictureService.insertPicture(picture);
-        List<Article> list=articleService.findAllArticlesByColumnid(1);
-        for(Article article:list){
-            System.out.println(article.getTime());
-            System.out.println(article.getAid());
+//        List<Article> list=articleService.findAllArticlesByColumnid(1);
+//        for(Article article:list){
+//            System.out.println(article.getTime());
+//            System.out.println(article.getAid());
+//        }
+//        System.out.println();
+        FileInputStream file = null;
+        byte[] bytes = new byte[0];
+        try {
+            file = new FileInputStream(new File("E:\\学习\\JavaEE\\news_release_system\\web\\img\\p6.jpg"));
+            bytes  = new byte[file.available()];
+            file.read(bytes);
+            file.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        System.out.println();
+
+        Picture picture = new Picture();
+        picture.setAid(5);
+        picture.setPic(bytes);
+        pictureService.insertPicture(picture);
 
     }
 }

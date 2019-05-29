@@ -116,6 +116,7 @@
                             <h3 class="text-danger">上传封面图片</h3>
                             <input type="file" class="file col-lg-4" id="uploadfile" style="width: 10px;height: 10px">
                         </div>
+
                         <div class="ibox-content no-padding">
                             <div class="summernote"  name="content" id="content"><h3>在此进行编辑你的文章</h3></div>
                         </div>
@@ -170,7 +171,7 @@
         allowedFileExtensions: ['jpg', 'png','jpeg'],//接收的文件后缀
         //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
         uploadAsync: true, //默认异步上传
-        showUpload: true, //是否显示上传按钮
+        showUpload: false, //是否显示上传按钮
         showRemove : true, //显示移除按钮
         showPreview : true, //是否显示预览
         showCaption: false,//是否显示标题
@@ -181,6 +182,11 @@
         // maxImageWidth: 1000,//图片的最大宽度
         // maxImageHeight: 1000,//图片的最大高度
         //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+        layoutTemplates :{
+            // actionDelete:'', //去除上传预览的缩略图中的删除图标
+            actionUpload:'',//去除上传预览缩略图中的上传图片；
+            //actionZoom:''   //去除上传预览缩略图中的查看详情预览的缩略图标。
+        },
         maxFileCount: 1, //表示允许同时上传的最大文件个数
         enctype: 'multipart/form-data',
         validateInitialCount:true,
