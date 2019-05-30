@@ -49,7 +49,7 @@ public class EditorController {
         FileInputStream file = null;
         byte[] bytes = new byte[0];
         try {
-            file = new FileInputStream(new File(request.getSession().getServletContext().getRealPath("/")+"tmp/"+filename));
+            file = new FileInputStream(new File(request.getSession().getServletContext().getRealPath("/")+"temp/"+filename));
             bytes  = new byte[file.available()];
             file.read(bytes);
             file.close();
@@ -61,12 +61,8 @@ public class EditorController {
 
         Picture picture = new Picture();
         picture.setPname(filename);
-        picture.setAid();
         picture.setPic(bytes);
-        pictureService.insertPicture(picture);
 
-
-        System.out.println(contentJson.getContent());
         byte[] content=contentJson.getContent().getBytes();
         System.out.println(contentJson.getContent().getBytes());
         String state=request.getParameter("state");
@@ -97,16 +93,19 @@ public class EditorController {
             article.setEid(uid);
             article.setCid(cid);
             articleService.insertArticle(article);
+            System.out.println(article.getAid());
             response.setHeader("REDIRECT","REDIRECT");
             response.setHeader("CONTEXTPATH","editor.html");
             rs.setStatus("succeed");
 
             articleModify.setAid(article.getAid());
+            picture.setAid(article.getAid());
         }
 
         articleModify.setEstate(state);
         articleModify.setUid(uid);
         articleService.insertArticleModify(articleModify);
+        pictureService.insertPicture(picture);
 
         return rs;
     }
@@ -139,7 +138,6 @@ public class EditorController {
     @RequestMapping(value = "/uploadpicture",method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
-    public Result uploadPicture(HttpServletRequest request, HttpServletResponse response, @RequestParam(required = false) MultipartFile uploadFile){
     public Result uploadPicture(HttpServletRequest request, HttpServletResponse response,@RequestParam(value="file",required=false) MultipartFile uploadFile){
 
         Result rs = new Result();

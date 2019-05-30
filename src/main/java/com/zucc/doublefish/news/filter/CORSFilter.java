@@ -20,7 +20,6 @@ public class CORSFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         HttpServletRequest  request  = (HttpServletRequest)servletRequest;
 
-        System.out.println("filter");
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, If-Modified-Since,REDIRECT,CONTEXTPATH");
         response.setHeader("Access-Control-Expose-Headers", "REDIRECT,CONTEXTPATH");

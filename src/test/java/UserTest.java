@@ -65,31 +65,33 @@ public class UserTest {
 //         articleModify.setAid(12);
 //        articleModify.setMtime(new Date(System.currentTimeMillis()));
 
-        FileInputStream file = null;
-        byte[] bytes = new byte[0];
-        try {
-            file = new FileInputStream(new File("E:\\学习\\JavaEE\\news_release_system\\web\\img\\p6.jpg"));
-            bytes  = new byte[file.available()];
-            file.read(bytes);
-            file.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        FileInputStream file = null;
+//        byte[] bytes = new byte[0];
+//        try {
+//            file = new FileInputStream(new File("E:\\学习\\JavaEE\\news_release_system\\web\\img\\p6.jpg"));
+//            bytes  = new byte[file.available()];
+//            file.read(bytes);
+//            file.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Picture picture = new Picture();
+//        picture.setAid(5);
+//        picture.setPic(bytes);
+//        pictureService.insertPicture(picture);
 
-        Picture picture = new Picture();
-        picture.setAid(5);
-        picture.setPic(bytes);
-        pictureService.insertPicture(picture);
 
-
-        articleService.insertArticleModify(articleModify);
+        //articleService.insertArticleModify(articleModify);
 
 //        List<ArticleModify> articleModify=articleService.findAllArticleModifiesByAid(12);
 //        for (ArticleModify articleModify1:articleModify){
 //            System.out.println(articleModify1.getMtime());
 //            System.out.println(articleModify1.getUname());
 //        }
+        Picture picture = pictureService.findPicturesByAid(228);
+        System.out.println(picture.getPname());
     }
 }

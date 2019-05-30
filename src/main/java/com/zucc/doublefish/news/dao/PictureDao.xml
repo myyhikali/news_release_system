@@ -13,7 +13,7 @@
 
     <!--insertPictureByAid-->
     <insert id="insertPicture" useGeneratedKeys="true"  parameterType="com.zucc.doublefish.news.pojo.Picture">
-        insert into table_picture(aid,pic) value ( #{aid},#{pic});
+        insert into table_picture(aid,pic,pname) value ( #{aid},#{pic},#{pname});
     </insert>
 
 

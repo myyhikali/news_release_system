@@ -23,7 +23,7 @@
         select aid,a.eid,title,a.state,a.content,a.cid,a.time,b.uname from table_article a left join table_user b on (a.eid=b.uid) where cid=#{cid} ORDER BY a.time desc
     </select>
 
-    <insert id="insertArticle" useGeneratedKeys="true" parameterType="com.zucc.doublefish.news.pojo.Article">
+    <insert id="insertArticle" useGeneratedKeys="true" keyProperty="aid" parameterType="com.zucc.doublefish.news.pojo.Article">
         insert into table_article(eid,cid,state,content,title,time) value(#{eid},#{cid},#{state},#{content},#{title},now());
     </insert>
     <delete id="deleteArticle" parameterType="Integer">
