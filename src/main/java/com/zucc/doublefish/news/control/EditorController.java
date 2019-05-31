@@ -134,8 +134,18 @@ public class EditorController {
         return rs;
     }
 
+    @RequestMapping("/savedarticle/{aid}")
+    @ResponseBody
+    public Article savedarticle(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid){
+//        System.out.println("140:"+aid);
+//        System.out.println(articleService.findArticleByArticleid(aid).getTitle());
+        Article article=articleService.findArticleByArticleid(aid);
+        article.setContent1(new String(article.getContent()));
+        return article;
+    }
 
-    @RequestMapping(value = "/uploadpicture",method = RequestMethod.POST)
+
+        @RequestMapping(value = "/uploadpicture",method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
     public Result uploadPicture(HttpServletRequest request, HttpServletResponse response,@RequestParam(value="file",required=false) MultipartFile uploadFile){

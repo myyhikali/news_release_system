@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
     <meta charset="utf-8">
@@ -102,35 +101,21 @@
             </div>
         </div>
         <div class="wrapper wrapper-content" >
-
-            <form class="m-t" role="form" id="filemassage">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <h3 class="text-danger">上传封面图片</h3>
-                        <input type="file" class="file col-lg-4" id="uploadfile" style="width: 10px;height: 10px">
-                    </div>
-                </div>
-            </form>
-
-            <form>
-                <input type="file" onchange="getFile()">
-                <button type="button" class="button button-primary button-pill button-small" onclick="submit()">提交</button>
-            </form>
-
             <form class="m-t" role="form" id="editormassage">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title" style="height: 150px">
-                            <h3 class="text-warning">文章标题:</h3><input placeholder="请输入你的标题" name="title" id="atitle">
-                            <h3 class="text-success">栏目类型</h3>
+                            <h3 class="text-warning">文章标题:</h3><input placeholder="请输入你的标题" name="title" id="title">
+                            <h3 class="text-success" id="column">栏目类型</h3>
                             <select class="form-control" style="width: 10%" v-model="cid" @change="getColumnSelected"> 
-                                <option :value="column.cid" v-for="column in columns" v-text="column.cname"></option>
+                                <option v-bind:selected="cid === column.cid" :value="column.cid" v-for="column in columns" v-text="column.cname"></option>
                             </select>
                         </div>  
-                        <!--<div>-->
-                            <!--<h3 class="text-danger">上传封面图片</h3>-->
-                            <!--<input type="file" class="file col-lg-4" id="uploadfile" style="width: 10px;height: 10px">-->
-                        <!--</div>-->
+                        <div>
+                            <h3 class="text-danger">上传封面图片</h3>
+                            <input type="file" class="file col-lg-4" id="uploadfile" style="width: 10px;height: 10px">
+                        </div>
+
                         <div class="ibox-content no-padding">
                             <div class="summernote"  name="content" id="content"><h3>在此进行编辑你的文章</h3></div>
                         </div>
@@ -138,10 +123,10 @@
                 </div>
                 <div class="row center-block">
                     <div class="col-lg-1 col-lg-offset-5">
-                        <button type="button" class="btn btn-primary block full-width m-b" onclick="save()">保存</button>
+                        <button type="button" class="btn btn-primary block full-width m-b" onclick="save('saved')">保存</button>
                     </div>
                     <div class="col-lg-1">
-                        <button type="button" class="btn btn-primary block full-width m-b" onclick="upload()">上传</button>
+                        <button type="button" class="btn btn-primary block full-width m-b" onclick="save('published')">上传</button>
                     </div>
                 </div>
             </form>
@@ -185,7 +170,7 @@
         allowedFileExtensions: ['jpg', 'png','jpeg'],//接收的文件后缀
         //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
         uploadAsync: true, //默认异步上传
-        showUpload: true, //是否显示上传按钮
+        showUpload: false, //是否显示上传按钮
         showRemove : true, //显示移除按钮
         showPreview : true, //是否显示预览
         showCaption: false,//是否显示标题
@@ -196,7 +181,12 @@
         // maxImageWidth: 1000,//图片的最大宽度
         // maxImageHeight: 1000,//图片的最大高度
         //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
-        maxFileCount: 10, //表示允许同时上传的最大文件个数
+        layoutTemplates :{
+            // actionDelete:'', //去除上传预览的缩略图中的删除图标
+            actionUpload:'',//去除上传预览缩略图中的上传图片；
+            //actionZoom:''   //去除上传预览缩略图中的查看详情预览的缩略图标。
+        },
+        maxFileCount: 1, //表示允许同时上传的最大文件个数
         enctype: 'multipart/form-data',
         validateInitialCount:true,
         previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
@@ -205,4 +195,5 @@
 </script>
 
 </body>
+
 </html>

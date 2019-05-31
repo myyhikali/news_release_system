@@ -1,6 +1,30 @@
 var file;
 
 window.onload =  function(){
+    if (window.localStorage.getItem("aid")!==null){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "GET",
+            url: "http://localhost:10080/editor/savedarticle/"+window.localStorage.getItem("aid"),
+            dataType: "json",
+            success: function (result,status,xhr) {
+                console.log(result);
+                app.articles=result;
+                document.getElementById("title").value=result.title;
+                app.cid = result.cid;
+                $('#content').summernote('code', result.content1);
+                window.localStorage.removeItem("aid");
+            },
+            error : function(e) {
+                console.log(e);
+                alert("异常！");
+            }
+        })
+    }
+
+
     $.ajax({
         type: "GET",//方法类型
         url: "http://localhost:10080/columns" ,//url
@@ -16,7 +40,7 @@ window.onload =  function(){
             console.log(e);
             alert("异常！");
         }
-    })
+    });
 
     document.querySelector("#uploadfile").addEventListener("change",function (event) {
         console.log(event);
@@ -64,12 +88,7 @@ window.onload =  function(){
             });
             $(".file-input")[0].appendChild(upbtn);
         }
-
-
-
     })
-
-
 };
 
 function save(state){
@@ -148,4 +167,4 @@ var app = new Vue({
             console.log(this.cid) ;
         }
     }
-})
+});

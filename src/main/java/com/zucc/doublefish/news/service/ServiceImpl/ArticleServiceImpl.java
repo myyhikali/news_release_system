@@ -56,4 +56,7 @@ public class ArticleServiceImpl implements ArticleService {
     public List<ArticleModify> findAllArticleModifiesByAid(int aid){
         return articleDao.findAllArticleModifiesByAid(aid);
     }
+    public void modifyArticleByArticleid(Article article){
+        articleDao.modifyArticleByArticleid(article);
+    }
 }

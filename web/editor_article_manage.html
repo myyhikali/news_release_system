@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -11,7 +11,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/plugins/bootstrap-markdown/bootstrap-markdown.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
 </head>
@@ -128,7 +127,8 @@
                                     <td>
                                         <div class="center-block">
                                             <button class="btn btn-default" data-toggle="modal" data-target="#publishModal" v-bind:data-aid="article.aid" v-show="article.state !== 'published'">上传</button>
-                                            <a class="btn btn-default" href="editor.html">编辑</a>
+                                            <a class="btn btn-default"  v-on:click="getaid(article.aid)" href="editor.html" >编辑</a>
+
                                             <button class="btn btn-default" data-toggle="modal" data-target="#deleteModal"  v-bind:data-aid="article.aid" >删除</button>
                                         </div>
                                     </td>
@@ -217,13 +217,14 @@
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
 
-<!-- Bootstrap markdown -->
-<script src="js/plugins/bootstrap-markdown/bootstrap-markdown.js"></script>
-<script src="js/plugins/bootstrap-markdown/markdown.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="editor_article_manage.js"></script>
-
+<script>
+    function getaid(aid) {
+        console.log(aid);
+        window.localStorage.setItem("aid",aid);
+    }
+</script>
 </body>
 
 </html>

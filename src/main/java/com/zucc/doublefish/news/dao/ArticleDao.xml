@@ -46,5 +46,9 @@
         select a.aid,title,a.state,b.pic  from table_article a left join table_picture b on(a.aid=b.aid) where a.cid=#{cid} AND a.state="checked" ORDER BY a.time desc limit 3
     </select>
 
+    <update id="modifyArticleByArticleid" parameterType="com.zucc.doublefish.news.pojo.Article">
+        UPDATE table_article SET cid=#{cid},state=#{state},content=#{content},title=#{title} WHERE aid=#{aid}
+    </update>
+
 
 </mapper>

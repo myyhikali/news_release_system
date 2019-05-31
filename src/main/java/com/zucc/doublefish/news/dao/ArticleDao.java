@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ArticleDao {
     public List<Article> findAllArticles();
+    public void modifyArticleByArticleid(Article article);
     public List<Article> findAllArticlesByUserid(int uid);
     public List<Article> findAllArticlesByColumnid(int cid);
     public List<Article> findArticlesWithState(String state);

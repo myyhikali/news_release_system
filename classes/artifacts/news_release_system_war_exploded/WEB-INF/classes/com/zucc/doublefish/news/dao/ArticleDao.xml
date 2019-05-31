@@ -23,7 +23,7 @@
         select aid,a.eid,title,a.state,a.content,a.cid,a.time,b.uname from table_article a left join table_user b on (a.eid=b.uid) where cid=#{cid} ORDER BY a.time desc
     </select>
 
-    <insert id="insertArticle" useGeneratedKeys="true" parameterType="com.zucc.doublefish.news.pojo.Article">
+    <insert id="insertArticle" useGeneratedKeys="true" keyProperty="aid" parameterType="com.zucc.doublefish.news.pojo.Article">
         insert into table_article(eid,cid,state,content,title,time) value(#{eid},#{cid},#{state},#{content},#{title},now());
     </insert>
     <delete id="deleteArticle" parameterType="Integer">
@@ -34,7 +34,21 @@
     </update>
 
     <insert id="insertArticleModify" useGeneratedKeys="true" parameterType="com.zucc.doublefish.news.pojo.ArticleModify">
-        insert into table_article_modify(mtime,uid,eid,estate) value(#{mtime},#{uid},#{eid},#{estate});
+        insert into table_article_modify(mtime,uid,estate,aid) value(now(),#{uid},#{estate},#{aid});
     </insert>
+    <!--findAllArticleModifiesByAid-->
+
+    <select id="findAllArticleModifiesByAid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.ArticleModify">
+        select a.mid,a.mtime,a.uid,a.estate,a.aid,b.uname from table_article_modify a left join table_user b on (a.uid=b.uid) where aid=#{aid} ORDER BY a.mtime desc
+    </select>
+
+    <select id="findArticlesWithPictureByColumnid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">
+        select a.aid,title,a.state,b.pic  from table_article a left join table_picture b on(a.aid=b.aid) where a.cid=#{cid} AND a.state="checked" ORDER BY a.time desc limit 3
+    </select>
+
+    <update id="modifyArticleByArticleid" parameterType="com.zucc.doublefish.news.pojo.Article">
+        UPDATE table_article SET cid=#{cid},state=#{state},content=#{content},title=#{title} WHERE aid=#{aid}
+    </update>
+
 
 </mapper>
