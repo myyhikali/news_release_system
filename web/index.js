@@ -14,7 +14,7 @@ window.onload = function (ev) {
         }
 
     }
-    if(app.level == null)
+    if(app.level == '')
         win.location.href="reader.html";
 }
 
