@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -34,14 +35,17 @@ public class UserTest {
     @Test
     public void test(){
 
-        Article article=new Article();
-        article.setContent("11111".getBytes());
-        article.setEid(1);
-        article.setState("save");
-//        article.setAid(1);
-        article.setTitle("1111111tile");
-        article.setAid(232);
-//        articleService.insertArticle(article);
-        articleService.modifyArticleByArticleid(article);
+        List<ArticleModify> list=articleService.findAllArticleModifiesByAid(228);
+        for(ArticleModify articleModify:list){
+            System.out.println(articleModify.getMtime());
+            System.out.println(articleModify.getUname());
+            System.out.println(articleModify.getEstate());
+            System.out.println(articleModify.getTitle());
+
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            System.out.println(sdf.format(date));
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(articleModify.getMtime()));
+        }
     }
 }

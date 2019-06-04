@@ -7,6 +7,7 @@ import com.zucc.doublefish.news.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -54,7 +55,13 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     public List<ArticleModify> findAllArticleModifiesByAid(int aid){
-        return articleDao.findAllArticleModifiesByAid(aid);
+        List<ArticleModify> list=articleDao.findAllArticleModifiesByAid(aid);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for(ArticleModify articleModify:list){
+            articleModify.setTime(sdf.format(articleModify.getMtime()));
+        }
+//        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(articleModify.getMtime())
+        return list;
     }
     public void modifyArticleByArticleid(Article article){
         articleDao.modifyArticleByArticleid(article);

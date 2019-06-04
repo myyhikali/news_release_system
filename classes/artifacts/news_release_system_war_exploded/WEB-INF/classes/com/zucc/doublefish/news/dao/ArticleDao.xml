@@ -39,7 +39,8 @@
     <!--findAllArticleModifiesByAid-->
 
     <select id="findAllArticleModifiesByAid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.ArticleModify">
-        select a.mid,a.mtime,a.uid,a.estate,a.aid,b.uname from table_article_modify a left join table_user b on (a.uid=b.uid) where aid=#{aid} ORDER BY a.mtime desc
+        select a.mid,a.mtime,a.uid,a.estate,a.aid,b.uname,c.title from table_article_modify a left join table_user b on (a.uid=b.uid)
+        left join table_article c on (a.aid=c.aid) where a.aid=#{aid} ORDER BY a.mtime desc
     </select>
 
     <select id="findArticlesWithPictureByColumnid" parameterType="Integer" resultType="com.zucc.doublefish.news.pojo.Article">

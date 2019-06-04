@@ -67,6 +67,13 @@ var app = new Vue({
     el:"#page-wrapper",
     data:{
         articles:[]
+    },
+    methods:{
+        setAid: function (message) {
+            // alert(message);
+            window.localStorage.setItem("aid",message);
+            window.location.href="article_modify_note.html";
+        }
     }
 })
 

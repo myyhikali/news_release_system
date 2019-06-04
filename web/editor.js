@@ -1,5 +1,6 @@
 var file;
 
+
 window.onload =  function(){
     if (window.localStorage.getItem("aid")!==null){
         $.ajax({
@@ -15,6 +16,7 @@ window.onload =  function(){
                 document.getElementById("title").value=result.title;
                 app.cid = result.cid;
                 $('#content').summernote('code', result.content1);
+                getPicByAid(window.localStorage.getItem("aid"));
                 window.localStorage.removeItem("aid");
             },
             error : function(e) {
@@ -90,9 +92,19 @@ window.onload =  function(){
         }
     })
 };
+function getPicByAid(aid) {
+            var imageDiv = $("#image")[0];
+            imageDiv.innerText = '';
+            var div = document.createElement("div");
+            var img = document.createElement("img");
+            img.src = 'http://localhost:10080/article/picture/'+aid;
+            img.className = 'img img-responsive';
+            div.appendChild(img);
+            imageDiv.appendChild(div);
+}
 
 function save(state){
-    var title=document.getElementById("atitle").value;
+    var title=document.getElementById("title").value;
     var content=$('#content').summernote('code');
 
     $.ajax({

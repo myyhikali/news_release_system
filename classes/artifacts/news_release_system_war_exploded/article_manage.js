@@ -42,12 +42,19 @@ var app = new Vue({
     el:"#page-wrapper",
     data:{
         articles:[]
+    },
+    methods:{
+        setAid: function (message) {
+            // alert(message);
+            window.localStorage.setItem("aid",message);
+            window.location.href="article_modify_note.html";
+        }
     }
-})
+});
 
 $('#allowModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var aid = button.data('aid') // Extract info from data-* attributes
+    var button = $(event.relatedTarget);
+    var aid = button.data('aid'); // Extract info from data-* attributes
 
     document.querySelector('#allow').onclick=function(event){
         changeArticleState(aid,"checked");

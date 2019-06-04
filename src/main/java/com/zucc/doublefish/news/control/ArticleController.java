@@ -37,6 +37,7 @@ public class ArticleController {
     public void readPicture(@PathVariable("aid") int aid, HttpServletResponse response){
         Picture picture = pictureService.findPicturesByAid(aid);
         try {
+            System.out.println("40");
             OutputStream os = new BufferedOutputStream(response.getOutputStream());
             os.write(picture.getPic());
             os.flush();

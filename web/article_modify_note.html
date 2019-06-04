@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
 
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>文章</title>
+    <title>文章修改记录</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -40,6 +40,7 @@
                         </a>
                     </li>
                 </ul>
+
             </nav>
         </div>
         <div class="row wrapper border-bottom white-bg page-heading">
@@ -47,43 +48,50 @@
                 <h2>文章</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="reader.html">栏目</a>
+                        <a href="index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="article_manage.html">文章管理</a>
                     </li>
                     <li class="active">
-                        <strong>文章管理</strong>
+                        <strong>文章修改记录</strong>
                     </li>
-
                 </ol>
-
             </div>
-
         </div>
-        <div id="article" class="wrapper wrapper-content  animated fadeInRight article">
+        <div class="wrapper wrapper-content">
+
             <div class="row">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <div class="ibox">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+
                         <div class="ibox-content">
-                            <div class="pull-right">
-                                <button class="btn btn-white btn-xs" type="button">{{article.cname}}</button>
-                            </div>
-                            <div class="text-center article-title">
-                                <h1 class="text-warning">
-                                    {{ article.title }}
-                                </h1>
-                            </div>
-                            <div class="text-center article" id="content">
-
-                            </div>
-
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>修改ID号</th>
+                                    <th>文章名称</th>
+                                    <th>文章状态</th>
+                                    <th>修改者</th>
+                                    <th>修改时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="articlemodify in articlemodifies">
+                                    <td v-text="articlemodify.mid"></td>
+                                    <td v-text="articlemodify.title"></td>
+                                    <td><code v-text="articlemodify.estate"></code></td>
+                                    <td><code v-text="articlemodify.uname"></code></td>
+                                    <td><code v-text="articlemodify.time"></code></td>
+                                </tr>
+                                </tbody>
+                            </table>
 
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
-
     </div>
 </div>
 
@@ -99,7 +107,8 @@
 
 <script src="js/vue.js"></script>
 <script src="navbar.js"></script>
-<script src="sample.js"></script>
+<script src="article_modify_note.js"></script>
+
 </body>
 
 </html>

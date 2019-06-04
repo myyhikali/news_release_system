@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
 
     <meta charset="utf-8">
@@ -67,7 +67,10 @@
                             <select class="form-control" style="width: 10%" v-model="cid" @change="getColumnSelected"> 
                                 <option v-bind:selected="cid === column.cid" :value="column.cid" v-for="column in columns" v-text="column.cname"></option>
                             </select>
-                        </div>  
+                        </div>
+                        <div id="image">
+
+                        </div>
                         <div>
                             <h3 class="text-danger">上传封面图片</h3>
                             <input type="file" class="file col-lg-4" id="uploadfile" style="width: 10px;height: 10px">
