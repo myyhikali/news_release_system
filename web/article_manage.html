@@ -11,7 +11,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/plugins/bootstrap-markdown/bootstrap-markdown.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
 </head>
@@ -76,9 +75,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="article in articles" v-on:click="setAid(article.aid)">
+                                <tr v-for="article in articles" >
                                     <td v-text="article.aid"></td>
-                                    <td v-text="article.title"></td>
+                                    <td v-text="article.title" v-on:click="setAid(article.aid)"></td>
                                     <td><code v-text="article.cname"></code></td>
                                     <td><code v-text="article.uname"></code></td>
                                     <td><code v-text="article.state"></code></td>
@@ -90,7 +89,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                            
                                 </tbody>
                             </table>
 

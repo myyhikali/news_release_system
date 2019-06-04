@@ -34,18 +34,7 @@ public class UserTest {
     private PictureService pictureService;
     @Test
     public void test(){
+        articleService.findAllArticlesPublished();
 
-        List<ArticleModify> list=articleService.findAllArticleModifiesByAid(228);
-        for(ArticleModify articleModify:list){
-            System.out.println(articleModify.getMtime());
-            System.out.println(articleModify.getUname());
-            System.out.println(articleModify.getEstate());
-            System.out.println(articleModify.getTitle());
-
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//            System.out.println(sdf.format(date));
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(articleModify.getMtime()));
-        }
     }
 }

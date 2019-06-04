@@ -28,7 +28,14 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     public List<Article> findAllArticlesPublished() {
-        return articleDao.findArticlesExceptState("saved");
+        List<Article> list=articleDao.findArticlesExceptState("saved");
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getState().equals("returned")||list.get(i).getState().equals("deleted")){
+                list.remove(i);
+                i--;
+            }
+        }
+        return list;
     }
 
     public List<Article> findArticlesWithPictureByColumnid(int cid) {

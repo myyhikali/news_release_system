@@ -34,7 +34,7 @@ public class ManagerController {
     @RequestMapping("articlemodify/{aid}")
     @ResponseBody
     public List<ArticleModify> findAllArticleModifyByAid(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid){
-        System.out.println("37:    "+aid);
+//        System.out.println("37:    "+aid);
         return articleService.findAllArticleModifiesByAid(aid);
     }
 
@@ -42,6 +42,23 @@ public class ManagerController {
     @ResponseBody
     public Result allowPublish(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid,@PathVariable("state") String state){
         Result rs = new Result();
+//        uid,estate,aid
+        int uid=-1;
+        for(Cookie cookie:request.getCookies()){
+            if(cookie.getName().equals("SESSIONID")){
+                uid = (Integer) SessionListener.sessionMap.get(cookie.getValue()).getAttribute("uid");
+            }
+        }
+
+        if(uid==-1){
+            rs.setStatus("failed");
+            rs.setContent("ÉÐÎ´µÇÂ¼");
+        }
+        ArticleModify articleModify=new ArticleModify();
+        articleModify.setUid(uid);
+        articleModify.setEstate(state);
+        articleModify.setAid(aid);
+        articleService.insertArticleModify(articleModify);
 
         articleService.changeArticleStateByArticleid(aid,state);
         rs.setStatus("succeed");
