@@ -19,6 +19,7 @@ window.onload =  function(){
 };
 
 function getArticles(cid){
+    getLatestArticleWithPics(cid);
     $.ajax({
         xhrFields: {
             withCredentials: true
@@ -71,6 +72,43 @@ function getArticles(cid){
         }
     })
 };
+
+
+function getLatestArticleWithPics(cid) {
+
+    $.ajax({
+        xhrFields: {
+            withCredentials: true
+        },
+        type: "GET",//方法类型
+        url: "http://localhost:10080/columns/"+cid+"/latest" ,//url
+        dataType: "json",//预期服务器返回
+        success: function (result,status,xhr) {
+            console.log(result);
+            var imageDiv = $("#images")[0];
+            imageDiv.innerText = '';
+            for(var i=0;i<result.length;i++){
+                var div = document.createElement("div");
+                var img = document.createElement("img");
+                var title= document.createElement("div");
+                div.className = i==0?"item active":"item";
+                img.src = 'http://localhost:10080/article/picture/'+result[i].aid;
+                img.className = 'img img-responsive';
+                title.className='carousel-caption';
+                title.textContent = result[i].title;
+                div.appendChild(img);
+                div.appendChild(title);
+                div.addEventListener("click",showArticle(result[i].aid));
+                imageDiv.appendChild(div);
+            }
+        },
+        error : function(e) {
+            console.log(e);
+            alert("异常！");
+        }
+    });
+}
+
 function formatTime(t)
 {
     var time = new Date(t);
@@ -89,7 +127,6 @@ function showArticle (aid) {
         window.localStorage.setItem("aid",aid);
         window.location.href = "sample.html";
     }
-
 }
 
 
@@ -103,6 +140,20 @@ var app = new Vue({
             console.log(event.target.attributes[0].nodeValue);
             getArticles(event.target.attributes[0].nodeValue);
         },
+        showArticle :function(aid) {
+            return function(evnet) {
+                console.log(aid);
+                window.localStorage.setItem("aid",aid);
+                window.location.href = "sample.html";
+            }
 
+        }
     }
-})
+});
+
+var app2 = new Vue({
+    el:"#images",
+    data:{
+        articlesWithPic:[]
+    }
+});

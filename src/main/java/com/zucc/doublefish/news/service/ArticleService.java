@@ -18,4 +18,6 @@ public interface ArticleService {
 
     public void insertArticleModify(ArticleModify articleModify);
     public List<ArticleModify> findAllArticleModifiesByAid(int aid);
+
+    public void modifyArticleByArticleid(Article article);
 }

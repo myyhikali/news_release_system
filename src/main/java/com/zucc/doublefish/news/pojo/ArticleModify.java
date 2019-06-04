@@ -9,7 +9,24 @@ public class ArticleModify {
     String uname;
     String estate;
     Date mtime;
+    String title;
+    String time;
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
     public int getMid() {
         return mid;
     }

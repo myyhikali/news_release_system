@@ -1,4 +1,32 @@
+var file;
+
+
 window.onload =  function(){
+    if (window.localStorage.getItem("aid")!==null){
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            type: "GET",
+            url: "http://localhost:10080/editor/savedarticle/"+window.localStorage.getItem("aid"),
+            dataType: "json",
+            success: function (result,status,xhr) {
+                console.log(result);
+                app.articles=result;
+                document.getElementById("title").value=result.title;
+                app.cid = result.cid;
+                $('#content').summernote('code', result.content1);
+                getPicByAid(window.localStorage.getItem("aid"));
+                window.localStorage.removeItem("aid");
+            },
+            error : function(e) {
+                console.log(e);
+                alert("异常！");
+            }
+        })
+    }
+
+
     $.ajax({
         type: "GET",//方法类型
         url: "http://localhost:10080/columns" ,//url
@@ -14,20 +42,77 @@ window.onload =  function(){
             console.log(e);
             alert("异常！");
         }
+    });
+
+    document.querySelector("#uploadfile").addEventListener("change",function (event) {
+        console.log(event);
+        file = event.target.files[0];
+        console.log(file.name);
+
+        if(document.querySelector("#uploadpicture")==null)
+        {
+            var upbtn = document.createElement("button");
+            upbtn.type = "button";
+            upbtn.tabIndex = "500";
+            upbtn.id = "uploadpicture";
+            upbtn.className = "btn btn-default btn-secondary fileinput-upload fileinput-upload-button";
+            var logo = document.createElement("i");
+            logo.className="glyphicon glyphicon-upload";
+            var txt = document.createElement("span");
+            txt.className="hidden-xs";
+            txt.textContent = "提交";
+            upbtn.appendChild(logo);
+            upbtn.appendChild(txt);
+            upbtn.addEventListener("click",function (event) {
+                event.preventDefault();
+
+                var formData = new FormData();
+                formData.append("file", file);
+                console.log(formData);
+
+                $.ajax({
+                    type: "POST",//方法类型
+                    url: 'http://localhost:10080/editor/uploadpicture' ,//url
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    processData : false,
+                    data: formData,
+                    contentType: false,
+                    success: function (result,status,xhr) {
+                        console.log(result);
+                    },
+                    error : function(e) {
+                        console.log(e);
+                        alert("异常！");
+                    }
+                })
+            });
+            $(".file-input")[0].appendChild(upbtn);
+        }
     })
 };
+function getPicByAid(aid) {
+            var imageDiv = $("#image")[0];
+            imageDiv.innerText = '';
+            var div = document.createElement("div");
+            var img = document.createElement("img");
+            img.src = 'http://localhost:10080/article/picture/'+aid;
+            img.className = 'img img-responsive';
+            div.appendChild(img);
+            imageDiv.appendChild(div);
+}
 
-function save(){
-    var state = "saved";
-    var title=document.getElementById("atitle").value;
+function save(state){
+    var title=document.getElementById("title").value;
     var content=$('#content').summernote('code');
-    // var content=document.getElementById("content").innerHTML;
+
     $.ajax({
         xhrFields: {
             withCredentials: true
         },
         type: "POST",//方法类型
-        url: "http://localhost:10080/editor/save/"+app.cid+"/?state="+ state+"&title="+title,//url
+        url: "http://localhost:10080/editor/save/"+app.cid+"/?state="+ state+"&title="+title+"&filename="+file.name,//url
         dataType: "json",//预期服务器返回的数据类型
         data: JSON.stringify(new result("succeed",content) ),
         contentType: "application/json",
@@ -56,42 +141,6 @@ function result(status,content){
     this.status = status;
     this.content = content;
 
-}
-
-
-
-function upload(){
-    var state = "published";
-    var title=document.getElementById("atitle").value;
-    var content=$('#content').summernote('code');
-    // var content=document.getElementById("content").innerHTML;
-    console.log(content);
-    $.ajax({
-        xhrFields: {
-            withCredentials: true
-        },
-        type: "POST",
-        url: "http://localhost:10080/editor/save?state="+ state+"&title="+title+"&content="+content,//url
-        dataType: "json",//预期服务器返回的数据类型
-        success: function (result,status,xhr) {
-            console.log(result);
-            if (result.status === "succeed") {
-                alert("SUCCESS");
-                var win = window;
-                while(win != win.top){
-                    win = win.top;
-                }
-                win.location.href = xhr.getResponseHeader("CONTEXTPATH");
-            }
-            else{
-                alert("标题不能为空且文章内容不能为空");
-            }
-        },
-        error : function(e) {
-            console.log(e);
-            alert("异常！");
-        }
-    });
 }
 
 function  getFile(event) {
@@ -130,4 +179,4 @@ var app = new Vue({
             console.log(this.cid) ;
         }
     }
-})
+});

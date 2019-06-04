@@ -2,6 +2,7 @@ package com.zucc.doublefish.news.control;
 
 import com.zucc.doublefish.news.listener.SessionListener;
 import com.zucc.doublefish.news.pojo.Article;
+import com.zucc.doublefish.news.pojo.ArticleModify;
 import com.zucc.doublefish.news.pojo.Column;
 import com.zucc.doublefish.news.pojo.Result;
 import com.zucc.doublefish.news.service.ArticleService;
@@ -28,6 +29,13 @@ public class ManagerController {
     @ResponseBody
     public List<Article> findAllArticlesPublished(){
         return articleService.findAllArticlesPublished();
+    }
+
+    @RequestMapping("articlemodify/{aid}")
+    @ResponseBody
+    public List<ArticleModify> findAllArticleModifyByAid(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid){
+        System.out.println("37:    "+aid);
+        return articleService.findAllArticleModifiesByAid(aid);
     }
 
     @RequestMapping("/article/{aid}/{state}")

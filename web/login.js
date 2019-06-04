@@ -12,7 +12,7 @@ function login(){
             success: function (result,status,xhr) {
                 console.log(result);    
                 if (result.status == "succeed") {
-                    alert("SUCCESS");
+                    // alert("SUCCESS");
                     var win = window;
                     while(win != win.top){
                         win = win.top;

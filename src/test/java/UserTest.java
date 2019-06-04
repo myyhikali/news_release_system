@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -34,64 +35,17 @@ public class UserTest {
     @Test
     public void test(){
 
-//        Article article=articleService.findArticleByArticleid(222);
-//        System.out.println(article.getTitle());
-//        System.out.println(article.getContent());
-//        System.out.println(article.getContent().toString());
-//        System.out.println(StringEscapeUtils.escapeHtml4(article.getContent().toString())
-//        );
-//        String s=" <h3>在此进行编辑你的文章</h3>";
-//        byte[] bytes=s.getBytes();
-//        System.out.println(bytes);
-//        String s1=new String(bytes);
-//        System.out.println(s1);
-//        Picture picture = pictureService.findPicturesByAid(1);
-//        System.out.println(picture.getPid());
-//        Picture picture =new Picture();
-//        picture.setAid(1);
-//        picture.setPic("111124".getBytes());
-//        pictureService.insertPicture(picture);
-  
-//        List<Article> list=articleService.findAllArticlesByColumnid(1);
-//        for(Article article:list){
-//            System.out.println(article.getTime());
-//            System.out.println(article.getAid());
-//        }
-//        System.out.println();
+        List<ArticleModify> list=articleService.findAllArticleModifiesByAid(228);
+        for(ArticleModify articleModify:list){
+            System.out.println(articleModify.getMtime());
+            System.out.println(articleModify.getUname());
+            System.out.println(articleModify.getEstate());
+            System.out.println(articleModify.getTitle());
 
-//         ArticleModify articleModify=new ArticleModify();
-//         articleModify.setUid(1);
-//         articleModify.setEstate("upload");
-//         articleModify.setAid(12);
-//        articleModify.setMtime(new Date(System.currentTimeMillis()));
-
-//        FileInputStream file = null;
-//        byte[] bytes = new byte[0];
-//        try {
-//            file = new FileInputStream(new File("E:\\学习\\JavaEE\\news_release_system\\web\\img\\p6.jpg"));
-//            bytes  = new byte[file.available()];
-//            file.read(bytes);
-//            file.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        Picture picture = new Picture();
-//        picture.setAid(5);
-//        picture.setPic(bytes);
-//        pictureService.insertPicture(picture);
-
-
-        //articleService.insertArticleModify(articleModify);
-
-//        List<ArticleModify> articleModify=articleService.findAllArticleModifiesByAid(12);
-//        for (ArticleModify articleModify1:articleModify){
-//            System.out.println(articleModify1.getMtime());
-//            System.out.println(articleModify1.getUname());
-//        }
-        Picture picture = pictureService.findPicturesByAid(228);
-        System.out.println(picture.getPname());
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            System.out.println(sdf.format(date));
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(articleModify.getMtime()));
+        }
     }
 }
