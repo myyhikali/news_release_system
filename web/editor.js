@@ -1,14 +1,16 @@
 var file;
+var aid;
 
 
 window.onload =  function(){
     if (window.localStorage.getItem("aid")!==null){
+        aid=window.localStorage.getItem("aid");
         $.ajax({
             xhrFields: {
                 withCredentials: true
             },
             type: "GET",
-            url: "http://localhost:10080/editor/savedarticle/"+window.localStorage.getItem("aid"),
+            url: "http://localhost:10080/editor/savedarticle/"+aid,
             dataType: "json",
             success: function (result,status,xhr) {
                 console.log(result);
@@ -106,13 +108,18 @@ function getPicByAid(aid) {
 function save(state){
     var title=document.getElementById("title").value;
     var content=$('#content').summernote('code');
+    var request_url;
+    if(aid==undefined)
+        request_url="http://localhost:10080/editor/save/"+app.cid+"/?state="+ state+"&title="+title+"&filename="+file.name;
+    else
+        request_url="http://localhost:10080/editor/modify/"+app.cid+"/"+aid+"?state="+ state+"&title="+title+"&filename="+file.name;
 
     $.ajax({
         xhrFields: {
             withCredentials: true
         },
         type: "POST",//方法类型
-        url: "http://localhost:10080/editor/save/"+app.cid+"/?state="+ state+"&title="+title+"&filename="+file.name,//url
+        url: request_url,//url
         dataType: "json",//预期服务器返回的数据类型
         data: JSON.stringify(new result("succeed",content) ),
         contentType: "application/json",

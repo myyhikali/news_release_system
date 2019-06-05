@@ -110,6 +110,86 @@ public class EditorController {
         return rs;
     }
 
+    @RequestMapping("/modify/{cid}/{aid}")
+    @ResponseBody
+    public Result modify(HttpServletRequest request, HttpServletResponse response,@PathVariable("cid") int cid,@PathVariable("aid") int aid,@RequestBody Result contentJson) throws ServletException, IOException {
+
+        ArticleModify articleModify = new ArticleModify();
+        Article article = articleService.findArticleByArticleid(aid);
+        Boolean hasPicture = false;
+        String title=request.getParameter("title");
+        String filename = request.getParameter("filename");
+
+        FileInputStream file = null;
+        byte[] bytes = new byte[0];
+        try {
+            file = new FileInputStream(new File(request.getSession().getServletContext().getRealPath("/")+"temp/"+filename));
+            bytes  = new byte[file.available()];
+            file.read(bytes);
+            file.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Picture picture = pictureService.findPicturesByAid(aid);
+        if(picture==null)
+            picture = new Picture();
+        else
+            hasPicture = true;
+        picture.setPname(filename);
+        picture.setPic(bytes);
+        picture.setAid(aid);
+
+        byte[] content=contentJson.getContent().getBytes();
+        System.out.println(contentJson.getContent().getBytes());
+        String state=request.getParameter("state");
+
+
+        Cookie cookies[]= request.getCookies();
+        HttpSession session;
+        int uid=-1;
+        Result rs = new Result();
+        for(Cookie c:cookies){
+            if(c.getName().equals("SESSIONID")){
+                session = SessionListener.sessionMap.get(c.getValue());
+                uid = (Integer)session.getAttribute("uid");
+            }
+        }
+        if(title.equals("")||content.equals("")){
+            response.setHeader("REDIRECT","REDIRECT");
+            response.setHeader("CONTEXTPATH","editor.html");
+            rs.setStatus("title empty");
+            System.out.println("empty");
+            return rs;
+        }
+        else {
+            article.setState(state);
+            article.setContent(content);
+            article.setTitle(title);
+            article.setEid(uid);
+            article.setCid(cid);
+            articleService.modifyArticleByArticleid(article);
+
+            response.setHeader("REDIRECT","REDIRECT");
+            response.setHeader("CONTEXTPATH","editor.html");
+            rs.setStatus("succeed");
+
+            articleModify.setAid(aid);
+        }
+
+        articleModify.setEstate(state);
+        articleModify.setUid(uid);
+        articleService.insertArticleModify(articleModify);
+        if(hasPicture)
+            pictureService.updatePicture(picture);
+        else
+            pictureService.insertPicture(picture);
+
+        return rs;
+    }
+
     @RequestMapping("/article")
     @ResponseBody
     public List<Article> findEditorArticles(HttpServletRequest request, HttpServletResponse response){
@@ -137,8 +217,6 @@ public class EditorController {
     @RequestMapping("/savedarticle/{aid}")
     @ResponseBody
     public Article savedarticle(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid){
-//        System.out.println("140:"+aid);
-//        System.out.println(articleService.findArticleByArticleid(aid).getTitle());
         Article article=articleService.findArticleByArticleid(aid);
         article.setContent1(new String(article.getContent()));
         return article;

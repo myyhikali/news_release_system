@@ -8,5 +8,5 @@ public interface PictureDao {
     public Picture findPicturesByAid(int aid);
     public void insertPicture(Picture picture);
     public void deletepictureByAid(int aid);
-
+    public void updatePicture(Picture picture);
 }

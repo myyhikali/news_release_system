@@ -21,4 +21,8 @@
     <delete id="deletepictureByAid" parameterType="Integer">
         DELETE FROM table_picture WHERE aid=#{aid}
     </delete>
+
+    <update id="updatePicture" parameterType="com.zucc.doublefish.news.pojo.Picture">
+        update table_picture set pic=#{pic},pname=#{pname} where aid=#{aid}
+    </update>
 </mapper>

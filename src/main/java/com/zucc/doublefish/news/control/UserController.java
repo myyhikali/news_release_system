@@ -1,5 +1,6 @@
 package com.zucc.doublefish.news.control;
 
+import com.zucc.doublefish.news.listener.SessionListener;
 import com.zucc.doublefish.news.pojo.Result;
 import com.zucc.doublefish.news.pojo.User;
 import com.zucc.doublefish.news.service.UserService;
@@ -32,6 +33,59 @@ public class UserController {
         response.addCookie(cookie);
     }
 
+    @RequestMapping("/logout")
+    @ResponseBody
+    public Result logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Result rs = new Result();
+        Object sessionId = null;
+        Object level =null;
+        for(Cookie cookie:request.getCookies()){
+            if(cookie.getName().equals("SESSIONID")){
+                sessionId = cookie.getValue();
+                cookie.setValue(null);
+                cookie.setPath("/");
+                response.addCookie(cookie);
+            }
+        }
+        if(sessionId!=null)
+        {
+            Cookie level_cookie = new Cookie("level",null);
+            level_cookie.setMaxAge(0);
+            level_cookie.setPath("/");
+            response.addCookie(level_cookie);
+            rs.setStatus("succeed");
+            SessionListener.sessionMap.get(sessionId).removeAttribute("uid");
+            SessionListener.sessionMap.get(sessionId).removeAttribute("uname");
+            SessionListener.sessionMap.get(sessionId).removeAttribute("level");
+        }
+        else{
+            rs.setStatus("failed");
+        }
+
+        return rs;
+    }
+
+    @RequestMapping("/username")
+    @ResponseBody
+    public Result username(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Result rs = new Result();
+        String uname = null;
+        for(Cookie cookie:request.getCookies()){
+            if(cookie.getName().equals("SESSIONID")){
+
+                uname = (String)request.getSession().getAttribute("uname");
+            }
+        }
+        if(uname!=null)
+        {
+            rs.setStatus("succeed");
+            rs.setContent(uname);
+        }
+        else
+            rs.setStatus("failed");
+
+        return rs;
+    }
     @RequestMapping("/checklogin")
     @ResponseBody
     public Result login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,13 +108,10 @@ public class UserController {
             request.getSession().setAttribute("uid", checkUser.getUid());
             request.getSession().setAttribute("level", checkUser.getLevel());
             Cookie typeCookie = new Cookie("level",String.valueOf(checkUser.getLevel()));
-//            Cookie idCookie   = new Cookie("uid",String.valueOf(checkUser.getUid()));
             cookie.setPath("/");
             typeCookie.setPath("/");
-//            idCookie.setPath("/");
             response.addCookie(cookie);
             response.addCookie(typeCookie);
-//            response.addCookie(idCookie);
 
             response.setHeader("REDIRECT","REDIRECT");
             response.setHeader("CONTEXTPATH","index.html");

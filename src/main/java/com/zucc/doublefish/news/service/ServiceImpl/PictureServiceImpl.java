@@ -24,6 +24,9 @@ public class PictureServiceImpl implements PictureService {
         pictureDao.deletepictureByAid(aid);
     }
 
+    public void updatePicture(Picture picture) {
+        pictureDao.updatePicture(picture);
+    }
 
 
 }
