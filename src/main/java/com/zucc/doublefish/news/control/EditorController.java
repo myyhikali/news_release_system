@@ -201,7 +201,14 @@ public class EditorController {
             }
         }
 //        System.out.println("uid"+uid);
-        return articleService.findAllArticlesByUserid(uid);
+        List<Article> list=articleService.findAllArticlesByUserid(uid);
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getState().equals("deleted")){
+                list.remove(i);
+                i--;
+            }
+        }
+        return list;
     }
 
 
@@ -210,6 +217,19 @@ public class EditorController {
     public Result allowPublish(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid,@PathVariable("state") String state){
         Result rs = new Result();
         articleService.changeArticleStateByArticleid(aid,state);
+        int uid = -1;
+        Cookie cookies[] = request.getCookies();
+        for(Cookie cookie:cookies){
+            if(cookie.getName().equals("SESSIONID")){
+                uid = (Integer)SessionListener.sessionMap.get(cookie.getValue()).getAttribute("uid");
+            }
+        }
+        ArticleModify articleModify=new ArticleModify();
+        articleModify.setAid(aid);
+        articleModify.setEstate(state);
+        articleModify.setUid(uid);
+        articleService.insertArticleModify(articleModify);
+
         rs.setStatus("succeed");
         return rs;
     }
