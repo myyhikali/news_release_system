@@ -83,10 +83,10 @@
                                     <td><code v-text="article.state"></code></td>
                                     <td>
                                         <div class="center-block">
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#publishModal" v-bind:data-aid="article.aid" v-show="article.state !== 'published'">上传</button>
-                                            <a class="btn btn-default"  v-on:click="setAid(article.aid)" href="editor.html" v-show="article.state !== 'published'">编辑</a>
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#publishModal" v-bind:data-aid="article.aid" v-show="article.state !== 'published' && article.state !== 'checked'">上传</button>
+                                            <a class="btn btn-default"  v-on:click="setAid(article.aid)" href="editor.html" v-show="article.state !== 'published' && article.state !== 'checked'">编辑</a>
 
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#deleteModal"  v-bind:data-aid="article.aid" v-show="article.state !== 'published'">删除</button>
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#deleteModal"  v-bind:data-aid="article.aid" v-show="article.state !== 'published' && article.state !== 'checked'">删除</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -164,13 +164,6 @@
     </div>
 </div>
 
-<script>
-    function setAid(aid) {
-        console.log(aid);
-        window.localStorage.setItem("aid",aid);
-        alert(aid);
-    }
-</script>
 <!-- Mainly scripts -->
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

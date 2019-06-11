@@ -15,7 +15,7 @@ window.onload =  function(){
             alert("异常！");
         }
     });
-    getArticles(1);
+    getArticles(1001);
 };
 
 function getArticles(cid){
@@ -34,7 +34,8 @@ function getArticles(cid){
                 console.log(i);
                 console.log(result[i]);
                 var a=document.createElement("a");
-                var h=document.createElement("h2");
+                a.className="text-muted";
+                var h=document.createElement("h3");
                 h.textContent=result[i].title;
                 a.appendChild(h);
                 a.onclick=showArticle(result[i].aid);

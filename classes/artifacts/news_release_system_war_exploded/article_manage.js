@@ -70,4 +70,12 @@ $('#rejectModal').on('show.bs.modal', function (event) {
     }
 })
 
+$('#deleteModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var aid = button.data('aid') // Extract info from data-* attributes
+
+    document.querySelector('#delete').onclick=function(event){
+        changeArticleState(aid,"deleted");
+    }
+})
 

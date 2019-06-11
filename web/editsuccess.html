@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>编辑</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">欢迎来到新闻管理后台</span>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-sign-out"></i> 注销
+                        </a>
+                    </li>
+                    <li>
+                        <a class="right-sidebar-toggle">
+                            <i class="fa fa-tasks"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>success</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="editor.html">编辑页</a>
+                    </li>
+                    <li class="active">
+                        <strong>success</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                        </div>
+                        <div class="ibox-content text-center css-animation-box">
+                            <!--<h3 class="text-navy">-->
+                            <!--SUCCESS-->
+                            <!--</h3>-->
+                            <!--<div class="hr-line-dashed"></div>-->
+
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <div id="animation_box" class="animated animation_select" data-animation="swing">
+                                        <p class="animation-text-info">
+                                        <h1><strong>成功编辑</strong></h1>
+                                        <br><br>
+                                        </p>
+                                        <div id="rickshaw_multi" class="rickshaw_graph"></div>
+                                    </div>
+                                </div>
+                                <!--<div class="col-lg-6 animation-efect-links text-center">-->
+                                <!--<a href="#" class="btn btn-white animation_select" data-animation="swing">摇摆 swing</a>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+
+<!-- Mainly scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="navbar.js"></script>
+<script>
+
+
+    $(document).ready(function() {
+
+        $('.animation_select').click( function(){
+            $('#animation_box').removeAttr('class').attr('class', '');
+            var animation = $(this).attr("data-animation");
+            $('#animation_box').addClass('animated');
+            $('#animation_box').addClass(animation);
+            return false;
+        });
+
+        function css() {
+            $('#animation_box').removeAttr('class').attr('class', '');
+            var animation = $(this).attr("data-animation");
+            $('#animation_box').addClass('animated');
+            $('#animation_box').addClass(animation);
+            return false;
+        };
+        // var graph2 = new Rickshaw.Graph( {
+        //     element: document.querySelector("#rickshaw_multi"),
+        //     renderer: 'area',
+        //     stroke: true,
+        //     series: [ {
+        //         data: [ { x: 0, y: 2 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 4 }, { x: 4, y: 8 } ],
+        //         // color: '#1ab394',
+        //         // stroke: '#17997f'
+        //     }, {
+        //         data: [ { x: 0, y: 13 }, { x: 1, y: 15 }, { x: 2, y: 17 }, { x: 3, y: 12 }, { x: 4, y: 10 } ],
+        //         color: '#eeeeee',
+        //         stroke: '#d7d7d7'
+        //     } ]
+        // } );
+        // graph2.renderer.unstack = true;
+        // graph2.render();
+
+        css();
+        $('.animation_select').trigger(new Event("click"));
+    });
+</script>
+
+</body>
+
+</html>

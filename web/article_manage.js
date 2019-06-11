@@ -47,8 +47,16 @@ var app = new Vue({
         setAid: function (message) {
             // alert(message);
             window.localStorage.setItem("aid",message);
+            window.location.href = "sample.html";
+            // window.location.href="article_modify_note.html";
+        },
+        checkhistory: function (message) {
+            // alert(message);
+            window.localStorage.setItem("aid",message);
+            // window.location.href = "sample.html";
             window.location.href="article_modify_note.html";
         }
+
     }
 });
 
@@ -70,4 +78,12 @@ $('#rejectModal').on('show.bs.modal', function (event) {
     }
 })
 
+$('#deleteModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var aid = button.data('aid') // Extract info from data-* attributes
+
+    document.querySelector('#delete').onclick=function(event){
+        changeArticleState(aid,"deleted");
+    }
+})
 

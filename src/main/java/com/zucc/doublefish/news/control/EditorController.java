@@ -238,6 +238,7 @@ public class EditorController {
         {
             System.out.println(uploadFile.getOriginalFilename());
             System.out.println(request.getSession().getServletContext().getRealPath("/"));
+            System.out.println("241: "+request.getSession().getServletContext().getRealPath("/"));
             File newFile = new File(request.getSession().getServletContext().getRealPath("/")+"temp/"+uploadFile.getOriginalFilename());
             try {
                 uploadFile.transferTo(newFile);

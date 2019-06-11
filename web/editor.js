@@ -131,7 +131,8 @@ function save(state){
                 while(win != win.top){
                     win = win.top;
                 }
-                win.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                win.location.href="editsuccess.html"
+                // win.location.href = xhr.getResponseHeader("CONTEXTPATH");
             }
             else{
                 alert("标题不能为空且文章内容不能为空");

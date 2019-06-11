@@ -143,10 +143,10 @@ public class UserController {
         else{
             int level;
             if (request.getParameter("choice").equals("editor")){
-                level=0;
+                level=1;
             }
             else
-                level=1;
+                level=0;
             userService.registerUser(uname,pwd,level);
             response.setHeader("REDIRECT","REDIRECT");
             response.setHeader("CONTEXTPATH","login.html");
