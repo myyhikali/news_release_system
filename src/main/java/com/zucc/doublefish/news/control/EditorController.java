@@ -9,6 +9,7 @@ import com.zucc.doublefish.news.pojo.Result;
 import com.zucc.doublefish.news.pojo.User;
 import com.zucc.doublefish.news.service.ArticleService;
 import com.zucc.doublefish.news.service.PictureService;
+import com.zucc.doublefish.news.service.TransactionService;
 import com.zucc.doublefish.news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,8 @@ public class EditorController {
     @Autowired
     private PictureService pictureService;
 
-    private String saveFilePath = "E:\\学习\\JavaEE\\news_release_system\\src\\main\\resources\\temp\\";
+    @Autowired
+    private TransactionService transactionService;
 
     @RequestMapping("/save/{cid}")
     @ResponseBody
@@ -85,28 +87,20 @@ public class EditorController {
             System.out.println("empty");
             return rs;
         }
-        else {
-            Article article =new Article();
-            article.setState(state);
-            article.setContent(content);
-            article.setTitle(title);
-            article.setEid(uid);
-            article.setCid(cid);
-            articleService.insertArticle(article);
-            System.out.println(article.getAid());
-            response.setHeader("REDIRECT","REDIRECT");
-            response.setHeader("CONTEXTPATH","editor.html");
-            rs.setStatus("succeed");
 
-            articleModify.setAid(article.getAid());
-            picture.setAid(article.getAid());
-        }
+        Article article =new Article();
+        article.setState(state);
+        article.setContent(content);
+        article.setTitle(title);
+        article.setEid(uid);
+        article.setCid(cid);
+        response.setHeader("REDIRECT","REDIRECT");
+        response.setHeader("CONTEXTPATH","editor.html");
+        rs.setStatus("succeed");
 
         articleModify.setEstate(state);
         articleModify.setUid(uid);
-        articleService.insertArticleModify(articleModify);
-        pictureService.insertPicture(picture);
-
+        transactionService.saveArticle(article,articleModify,picture);
         return rs;
     }
 
@@ -164,29 +158,21 @@ public class EditorController {
             System.out.println("empty");
             return rs;
         }
-        else {
-            article.setState(state);
-            article.setContent(content);
-            article.setTitle(title);
-            article.setEid(uid);
-            article.setCid(cid);
-            articleService.modifyArticleByArticleid(article);
+        article.setState(state);
+        article.setContent(content);
+        article.setTitle(title);
+        article.setEid(uid);
+        article.setCid(cid);
 
-            response.setHeader("REDIRECT","REDIRECT");
-            response.setHeader("CONTEXTPATH","editor.html");
-            rs.setStatus("succeed");
+        response.setHeader("REDIRECT","REDIRECT");
+        response.setHeader("CONTEXTPATH","editor.html");
+        rs.setStatus("succeed");
 
-            articleModify.setAid(aid);
-        }
-
+        articleModify.setAid(aid);
         articleModify.setEstate(state);
         articleModify.setUid(uid);
-        articleService.insertArticleModify(articleModify);
-        if(hasPicture)
-            pictureService.updatePicture(picture);
-        else
-            pictureService.insertPicture(picture);
 
+        transactionService.modifyArticle(article,articleModify,picture,hasPicture);
         return rs;
     }
 
@@ -216,7 +202,7 @@ public class EditorController {
     @ResponseBody
     public Result allowPublish(HttpServletRequest request, HttpServletResponse response,@PathVariable("aid") int aid,@PathVariable("state") String state){
         Result rs = new Result();
-        articleService.changeArticleStateByArticleid(aid,state);
+
         int uid = -1;
         Cookie cookies[] = request.getCookies();
         for(Cookie cookie:cookies){
@@ -228,8 +214,7 @@ public class EditorController {
         articleModify.setAid(aid);
         articleModify.setEstate(state);
         articleModify.setUid(uid);
-        articleService.insertArticleModify(articleModify);
-
+        transactionService.modifyArticleState(aid,state,articleModify);
         rs.setStatus("succeed");
         return rs;
     }

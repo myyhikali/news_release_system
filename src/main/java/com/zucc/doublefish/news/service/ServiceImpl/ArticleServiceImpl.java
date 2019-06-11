@@ -6,6 +6,7 @@ import com.zucc.doublefish.news.pojo.ArticleModify;
 import com.zucc.doublefish.news.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -42,21 +43,27 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.findArticlesWithPictureByColumnid(cid);
     }
 
+    @Transactional
     public void insertArticle(Article article){
         this.articleDao.insertArticle(article);
     }
     public Article findArticleByArticleid(int aid){
         return this.articleDao.findArticleByArticleid(aid);
     }
+
+    @Transactional
     public void deleteArticle(int aid){
         this.articleDao.deleteArticle(aid);
     }
+
+    @Transactional
     public void changeArticleStateByArticleid(int aid,String state){
         Article article=this.findArticleByArticleid(aid);
         article.setState(state);
         this.articleDao.changeArticleStateByArticleid(article);
     }
 
+    @Transactional
     public void insertArticleModify(ArticleModify articleModify){
         articleDao.insertArticleModify(articleModify);
     }
@@ -70,6 +77,8 @@ public class ArticleServiceImpl implements ArticleService {
 //        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(articleModify.getMtime())
         return list;
     }
+
+    @Transactional
     public void modifyArticleByArticleid(Article article){
         articleDao.modifyArticleByArticleid(article);
     }

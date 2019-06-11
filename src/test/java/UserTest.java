@@ -1,8 +1,5 @@
 import com.zucc.doublefish.news.pojo.*;
-import com.zucc.doublefish.news.service.ArticleService;
-import com.zucc.doublefish.news.service.ColumnService;
-import com.zucc.doublefish.news.service.PictureService;
-import com.zucc.doublefish.news.service.UserService;
+import com.zucc.doublefish.news.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +29,15 @@ public class UserTest {
     private ArticleService articleService;
     @Autowired
     private PictureService pictureService;
+    @Autowired
+    private TransactionService transactionService;
     @Test
     public void test(){
         articleService.findAllArticlesPublished();
-
+        ArticleModify articleModify = new ArticleModify();
+        articleModify.setAid(0);
+        articleModify.setMid(0);
+        articleModify.setEstate("published");
+        transactionService.modifyArticleState(-1,"published",articleModify);
     }
 }

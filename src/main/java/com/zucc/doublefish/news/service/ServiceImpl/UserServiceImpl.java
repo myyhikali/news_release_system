@@ -5,6 +5,7 @@ import com.zucc.doublefish.news.pojo.User;
 import com.zucc.doublefish.news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,6 +17,7 @@ public class UserServiceImpl implements UserService {
         return this.userDao.findUserByUname(uname);
     }
 
+    @Transactional
     public boolean registerUser(String uname, String pwd, int level) {
         User user = findUserByUname(uname);
         if(user==null){

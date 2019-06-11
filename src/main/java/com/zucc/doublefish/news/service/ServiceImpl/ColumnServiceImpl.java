@@ -7,6 +7,7 @@ import com.zucc.doublefish.news.pojo.Column;
 import com.zucc.doublefish.news.service.ColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,9 +22,13 @@ public class ColumnServiceImpl implements ColumnService {
     public List<Column> findAllColumns(){
         return this.columnDao.findAllColumns();
     }
+
+    @Transactional
     public void insertColumn(Column column){
         this.columnDao.insertColumn(column);
     }
+
+    @Transactional
     public boolean deleteColumn(int cid){
         List<Article> articles = articleDao.findAllArticlesByColumnid(cid);
         if(articles==null || articles.size()!=0)
@@ -34,6 +39,7 @@ public class ColumnServiceImpl implements ColumnService {
     public void updateColumn(Column column){
         this.columnDao.updateColumn(column);
     }
+    @Transactional
     public void updateColumn(int cid,String cname){
         Column column=this.columnDao.findColumnByColumnid(cid);
         column.setCname(cname);

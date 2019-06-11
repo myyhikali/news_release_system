@@ -7,6 +7,7 @@ import com.zucc.doublefish.news.pojo.Column;
 import com.zucc.doublefish.news.pojo.Result;
 import com.zucc.doublefish.news.service.ArticleService;
 import com.zucc.doublefish.news.service.ColumnService;
+import com.zucc.doublefish.news.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,12 @@ import java.util.List;
 public class ManagerController {
     @Autowired
     ColumnService columnService;
+
     @Autowired
     ArticleService articleService;
+
+    @Autowired
+    TransactionService transactionService;
 
     @RequestMapping("/article")
     @ResponseBody
@@ -58,9 +63,8 @@ public class ManagerController {
         articleModify.setUid(uid);
         articleModify.setEstate(state);
         articleModify.setAid(aid);
-        articleService.insertArticleModify(articleModify);
 
-        articleService.changeArticleStateByArticleid(aid,state);
+        transactionService.modifyArticleState(aid,state,articleModify);
         rs.setStatus("succeed");
         return rs;
     }
