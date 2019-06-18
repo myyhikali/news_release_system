@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:v-on="http://www.w3.org/1999/xhtml">
-
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>管理员文章管理</title>
-
+    <title>编辑者文章管理</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
@@ -27,7 +24,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">欢迎来到新闻管理后台</span>
+                        <span class="m-r-sm text-muted welcome-message">欢迎来到养生区后台</span>
                     </li>
                     <li>
                         <a href="login.html">
@@ -63,7 +60,7 @@
                     <div class="ibox float-e-margins">
 
                         <div class="ibox-content">
-                            <table class="table table-striped" id="table">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>文章ID</th>
@@ -75,18 +72,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="article in articles" >
+                                <tr v-for="article in articles">
                                     <td v-text="article.aid"></td>
-                                    <td v-text="article.title" v-on:click="setAid(article.aid)"></td>
+                                    <td v-text="article.title"></td>
                                     <td><code v-text="article.cname"></code></td>
                                     <td><code v-text="article.uname"></code></td>
                                     <td><code v-text="article.state"></code></td>
                                     <td>
                                         <div class="center-block">
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#allowModal" v-bind:data-aid="article.aid" v-show="article.state === 'published'">允许上传</button>
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#rejectModal" v-bind:data-aid="article.aid" v-show="article.state === 'published'">退回稿件</button>
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#deleteModal" v-bind:data-aid="article.aid" v-show="article.state === 'checked'">删除</button>
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#deleteModal" v-on:click="checkhistory(article.aid)">查看修改历史信息</button>
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#publishModal" v-bind:data-aid="article.aid" v-show="article.state !== 'published' && article.state !== 'checked'">上传</button>
+                                            <button class="btn btn-default" data-toggle="modal" data-target="#deleteModal"  v-bind:data-aid="article.aid" v-show="article.state !== 'published' && article.state !== 'checked'">删除</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -104,7 +99,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -113,32 +108,12 @@
             </div>
             <div class="modal-body">
                 <div class="row center-block" >
-                    <h3>确认退回文章吗？</h3>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" id="reject">确认</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="allowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel1">Attention</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row center-block" >
                     <h3>确认上传文章吗？</h3>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="allow" data-dismiss="modal" aria-label="Close">确认</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="allow" aria-label="Close">确认</button>
             </div>
         </div>
     </div>
@@ -158,7 +133,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="delete" aria-label="Close">确认</button>
+                <button type="button" class="btn btn-primary" id="delete" data-dismiss="modal" aria-label="Close">确认</button>
             </div>
         </div>
     </div>
@@ -176,7 +151,7 @@
 
 <script src="js/vue.js"></script>
 <script src="navbar.js"></script>
-<script src="article_manage.js"></script>
+<script src="editor_article_manage.js"></script>
 
 </body>
 

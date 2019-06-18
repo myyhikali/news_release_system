@@ -84,15 +84,12 @@
                                     <td>
                                         <div class="center-block">
                                             <button class="btn btn-default" data-toggle="modal" data-target="#allowModal" v-bind:data-aid="article.aid" v-show="article.state === 'published'">允许上传</button>
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#rejectModal" v-bind:data-aid="article.aid" v-show="article.state === 'published'">退回稿件</button>
                                             <button class="btn btn-default" data-toggle="modal" data-target="#deleteModal" v-bind:data-aid="article.aid" v-show="article.state === 'checked'">删除</button>
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#deleteModal" v-on:click="checkhistory(article.aid)">查看修改历史信息</button>
                                         </div>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
@@ -104,25 +101,6 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Attention</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row center-block" >
-                    <h3>确认退回文章吗？</h3>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" id="reject">确认</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade" id="allowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">

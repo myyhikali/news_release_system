@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>编辑器</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/fileinput.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">欢迎来到新闻管理后台</span>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-sign-out"></i> 注销
+                        </a>
+                    </li>
+                    <li>
+                        <a class="right-sidebar-toggle">
+                            <i class="fa fa-tasks"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>编辑</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">文章</a>
+                    </li>
+                    <li class="active">
+                        <strong>编辑</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content" >
+            <form class="m-t" role="form" id="editormassage">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="height: 150px">
+                            <h3 class="text-warning">文章标题:</h3><input placeholder="请输入你的标题" name="title" id="title">
+                            <h3 class="text-success" id="column">栏目类型</h3>
+                            <select class="form-control" style="width: 10%" v-model="cid" @change="getColumnSelected">
+                                <option v-bind:selected="cid === column.cid" :value="column.cid" v-for="column in columns" v-text="column.cname"></option>
+                            </select>
+                        </div>
+
+                        <div class="ibox-content no-padding">
+                            <div class="summernote"  name="content" id="content"><h3>在此进行编辑你的文章</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row center-block">
+                    <div class="col-lg-1 col-lg-offset-5">
+                        <button type="button" class="btn btn-primary block full-width m-b" onclick="save('saved')">保存</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-primary block full-width m-b" onclick="save('published')">上传</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<!-- Mainly scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="navbar.js"></script>
+<script src="editor.js"></script>
+<script src="js/fileinput.min.js"></script>
+<!-- SUMMERNOTE -->
+<script src="js/plugins/summernote/summernote.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.summernote').summernote(
+            {
+                height:800,
+                maxHeight:null
+            }
+        );
+    });
+
+    $("#uploadfile").fileinput({
+        language: 'zh', //设置语言
+        uploadUrl: "localhost:10080/editor/uploadpicture", //上传的地址(访问接口地址)
+        allowedFileExtensions: ['jpg', 'png','jpeg'],//接收的文件后缀
+        //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+        uploadAsync: true, //默认异步上传
+        showUpload: false, //是否显示上传按钮
+        showRemove : true, //显示移除按钮
+        showPreview : true, //是否显示预览
+        showCaption: false,//是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        dropZoneEnabled: false,//是否显示拖拽区域
+        minImageWidth: 50, //图片的最小宽度
+        minImageHeight: 50,//图片的最小高度
+        // maxImageWidth: 1000,//图片的最大宽度
+        // maxImageHeight: 1000,//图片的最大高度
+        //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+        layoutTemplates :{
+            // actionDelete:'', //去除上传预览的缩略图中的删除图标
+            actionUpload:''//去除上传预览缩略图中的上传图片；
+            //actionZoom:''   //去除上传预览缩略图中的查看详情预览的缩略图标。
+        },
+        maxFileCount: 1, //表示允许同时上传的最大文件个数
+        enctype: 'multipart/form-data',
+        validateInitialCount:true,
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！"
+    });
+</script>
+
+</body>
+
+</html>

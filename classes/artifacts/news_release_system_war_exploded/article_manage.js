@@ -47,8 +47,16 @@ var app = new Vue({
         setAid: function (message) {
             // alert(message);
             window.localStorage.setItem("aid",message);
+            window.location.href = "sample.html";
+            // window.location.href="article_modify_note.html";
+        },
+        checkhistory: function (message) {
+            // alert(message);
+            window.localStorage.setItem("aid",message);
+            // window.location.href = "sample.html";
             window.location.href="article_modify_note.html";
         }
+
     }
 });
 
