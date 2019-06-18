@@ -1,5 +1,6 @@
 window.onload =  function(){
     var aid = window.localStorage.getItem("aid");
+    window.localStorage.removeItem("aid");
     $.ajax({
         type: "GET",//方法类型
         url: "http://localhost:10080/article/read/"+aid ,//url

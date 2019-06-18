@@ -1,21 +1,4 @@
 (function () {
-    $.ajax({
-        xhrFields: {
-            withCredentials: true
-        },
-        type: "GET",
-        url: "http://localhost:10080/user/username" ,
-        dataType: "json",
-        success: function (result,status,xhr) {
-            console.log(result);
-            if(result.status=="succeed")
-                side_menu.uname=result.content;
-        },
-        error : function(e) {
-            console.log(e);
-            alert("异常！");
-        }
-    })
 
     var nav = document.createElement("nav");
 
@@ -33,7 +16,7 @@
         "                               <span class=\"text-muted text-xs block\" v-if=\'level === 1\'>编辑者<b class=\"caret\"></b></span>"+
         "                             </span> </a>\n" +
         "                        <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\n" +
-        "                            <li><a v-on:click=\'logout()\'>登出</a></li>\n" +
+        "                            <li><a v-on:click=\'logout()\' v-text=\"level===2?\'登录\':\'登出\'\"></a></li>\n" +
         "                        </ul>\n" +
         "                    </div>\n" +
         "                    <div class=\"logo-element\">\n" +
@@ -77,6 +60,8 @@
         },
         methods:{
             logout:function () {
+                if(window.localStorage.getItem("uname")!=undefined){
+                window.localStorage.removeItem("uname");
                 $.ajax({
                     xhrFields: {
                         withCredentials: true
@@ -97,6 +82,36 @@
                         alert("异常！");
                     }
                 })
+                }
+                else{
+                    var win = window;
+                    while(win != win.top){
+                        win = win.top;
+                    }
+                    window.location.href="login.html";
+                }
+            },
+            getUname:function(){
+                $.ajax({
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: "GET",
+                    url: "http://localhost:10080/user/username" ,
+                    dataType: "json",
+                    success: function (result,status,xhr) {
+                        console.log(result);
+                        if(result.status=="succeed")
+                        {
+                            side_menu.uname=result.content;
+                            window.localStorage.setItem("uname",result.content)
+                        }      
+                    },
+                    error : function(e) {
+                        console.log(e);
+                        alert("异常！");
+                    }
+                })
             }
         }
     })
@@ -111,13 +126,14 @@
         var name = cookies[i].split("=")[0];
         if(name==="level")
         {
+            if(win.localStorage.getItem("uname")==undefined)
+                side_menu.getUname();
+            else
+                side_menu.uname=window.localStorage.getItem("uname");
             side_menu.level = parseInt(cookies[i].split("=")[1]);
         }
     }
     if(side_menu.level === '')
         side_menu.level = 2;
-    // if(app.level == '')
-    //     win.location.href="reader.html";
-
 })()
 
